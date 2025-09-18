@@ -13,6 +13,59 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+# Cuckoo 相关
+CUCKOO_PATH = os.path.join(os.getcwd(), "..")
+sys.path.append(CUCKOO_PATH)
+from lib.cuckoo.common.config import Config
+
+cfg = Config("reporting")
+
+# 检查 MongoDB 报告是否在 Cuckoo 中启用
+if not cfg.mongodb.get("enabled"):
+    raise Exception("Mongo reporting module is not enabled in cuckoo, aborting!")
+
+# 从 reporting.conf 获取连接选项
+MONGO_HOST = cfg.mongodb.get("host", "127.0.0.1")
+MONGO_PORT = cfg.mongodb.get("port", 27017)
+MONGO_DB = cfg.mongodb.get("db", "cuckoo")
+
+try:
+    MONGO = pymongo.MongoClient(MONGO_HOST, MONGO_PORT)[MONGO_DB]
+except Exception as e:
+    raise Exception("Unable to connect to Mongo: %s" % e)
+
+# 检查 Elasticsearch 是否启用
+if cfg.elasticsearch.get("enabled"):
+    try:
+        import elasticsearch
+    except ImportError:
+        raise Exception("ElasticSearch 已启用但未安装，程序终止！")
+
+    hosts = []
+    # 获取 hosts 配置，默认值为 "127.0.0.1:9200"
+    for host in cfg.elasticsearch.get("hosts", "127.0.0.1:9200").split(","):
+        if host.strip():  # 去除空白字符
+            hosts.append(host.strip())
+
+    # 创建 Elasticsearch 客户端实例
+    ELASTIC = elasticsearch.Elasticsearch(
+        [host for host in hosts if host]  # 确保 hosts 列表不为空
+    )
+else:
+    ELASTIC = None  # 如果未启用 Elasticsearch，则设置为 None
+
+
+MOLOCH_ENABLED = cfg.moloch.get("enabled")
+MOLOCH_HOST = cfg.moloch.get("host")
+
+# 初始化 VPN 相关设置
+from lib.cuckoo.core.startup import init_rooter, init_routing
+
+init_rooter()
+init_routing()
+
+##cuckoo相关
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
