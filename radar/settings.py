@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+from pathlib import Path
 
 # Cuckoo 相关
 CUCKOO_PATH = os.path.join(os.getcwd(), "..")
