@@ -1,0 +1,19 @@
+{% load analysis_tags %}
+<div>
+    <div class="static-summary-header">
+      <span class="header—symbol"></span>
+      <span class="header—title">二进制图像</span>
+    </div>
+<div class="grid-container">
+    {% for img in analysis.malimg %}
+        {% for size in request|malimg_resize %}
+            <div class="image-box size-{{ size }}">
+                <a data-lightbox="screenshot" href="{% url 'analysis.views.file' 'malimg' img %}">
+                    <img src="{% url 'analysis.views.file' 'malimg' img %}" alt="Image {{ size }}x{{ size }}" loading="lazy" />
+                </a>
+                <span>{{ size }}x{{ size }}</span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+</div>

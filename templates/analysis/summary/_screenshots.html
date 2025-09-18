@@ -1,0 +1,19 @@
+<div>
+    <div class="static-summary-header">
+      <span class="header—symbol"></span>
+      <span class="header—title">运行截图</span>
+    </div>
+    <div>
+    {% if analysis.shots %}
+        <div>
+        {% for shot in analysis.shots %}
+            <a data-lightbox="screenshot" href="{% url "analysis.views.file" "screenshot" shot %}">
+                <img class="opaque screenshot" src="{% url "analysis.views.file" "screenshot" shot %}" style="height: 120px;" />
+            </a>
+        {% endfor %}
+        </div>
+    {% else %}
+        No screenshots available.
+    {% endif %}
+    </div>
+</div>

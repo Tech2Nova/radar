@@ -1,0 +1,81 @@
+{% for analysis in files %}
+    {% if analysis.status == "reported" %}
+    <div class="task-item tab-pane fade in active" id="files">
+        <div class="task-score">
+            <div class="task-score-circle"
+            style="background: conic-gradient(#ff6b6b {{ analysis.score|to_percentage|floatformat:2 }}%,#e0e0e0 0);">
+            <div class="task-score-inner-circle">
+                <span>{{ analysis.score }}</span>
+            </div>
+            </div>
+        </div>
+        <div class="task-result">
+            <div class="task-result-filesize">
+            {% if "PE" in analysis.platform %}
+                <span>exe</span>
+            {% else %}
+                <span>unknown</span>
+            {% endif %}
+
+            <span>{{ analysis.size|sizeof_fmt }}</span>
+            <span>{{ analysis.clock }}首次发现！</span>
+            </div>
+            <div class="task-result-labels">
+                {% if analysis.score < 0.1 %} 
+                    <span>良性</span>
+                {% elif analysis.score < 2.1 %} 
+                    <span>低危</span>
+                {% elif analysis.score < 5.5 %} 
+                    <span>中危</span>
+                {% elif analysis.score < 8.6 %} 
+                    <span>高危</span>
+                {% elif analysis.score < 9.9 %} 
+                    <span>极危</span>
+                {% else %}
+                    <span>0-day</span>
+                {% endif %}
+
+        {% if analysis.labels %}
+            {% with analysis.labels|split:"," as split_list %}
+                {% for item in split_list %}
+                    {% if item != 'none' %}
+                        <span>{{ item }}</span>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        {% endif %}
+        </div>
+            {% comment %} {{ analysis.labels }} {% endcomment %}
+        </div>
+        <div class="task-environment">
+            <div class="task-environment-icon">
+                <i class="bi bi-windows"></i>
+            </div>
+            <div class="task-environment-name">
+                <span>{{ analysis.guest.label }}</span>
+                <span>{{ analysis.guest.shutdown_on }}</span>
+            </div>
+
+        </div>
+        <div class="task-info">
+            <div class="task-info-filename">
+                <span>文件名:</span> 
+                <span>{{ analysis.filename }}</span>
+                <i class="bi bi-clipboard2-plus"></i>
+            </div>
+            <div class="task-info-filetype">
+                <span> SHA1:</span>
+                <span>{{ analysis.sha1 }}</span>
+                <i class="bi bi-clipboard2-plus"></i>
+            </div>
+            <div class="task-info-md5">
+                <span> MD5:</span>
+                <a href="{% url "analysis.views.report" analysis.id %}">
+                    <span>{{ analysis.sample.md5 }}</span>
+                </a>
+                <i class="bi bi-clipboard2-plus"></i>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

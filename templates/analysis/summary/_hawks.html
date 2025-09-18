@@ -1,0 +1,152 @@
+
+<style>
+  .deeplearning-wrap {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .deeplearning-wrap:hover {
+    transform: translateY(-2px);
+  }
+
+  .deeplearning-title {
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: white;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .deeplearning-title span {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .deeplearning-items {
+    padding: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .aiengine-item {
+    background: #f0f7ff;
+    border: 1px solid #cce3ff;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .aiengine-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  }
+
+  .aiengine-item .name {
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  .aiengine-item .score {
+    color: #6366f1;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .hawk-details {
+    padding: 20px;
+  }
+
+  .hawk-items-details {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .hawk-items-details th {
+    background: rgba(99,102,241,0.1);
+    color: #1a365d;
+    font-weight: 600;
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .hawk-items-details td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #4a5568;
+  }
+
+  .hawk-items-details tr:hover {
+    background: rgba(99,102,241,0.05);
+  }
+</style>
+
+<div class="deeplearning-wrap" id="deeplearning">
+    <div class="deeplearning-title toggle-menu">
+      <span>鹰眼引擎</span>
+      <i class="bi bi-chevron-bar-right" style="display: inline-block;"></i>
+      <i class="bi bi-chevron-bar-up" style="display: none;"></i>
+    </div>
+    <div class="deeplearning-items" role="tablist" style="display: flex;">
+      {% for method in analysis.detection %}
+        {% for name, results in method.items %}
+          {% if name == 'DACN' or name == 'IMCLNet' %}
+          <div class="aiengine-item">
+            <span class="name">{% if name == 'DACN' %}ECACN{% else %}{{ name }}{% endif %}</span>
+            <span class="score">{{ results.score|floatformat:2 }}</span>
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+    <div class="hawk-details" style="display: none;">
+      <table class="hawk-items-details">
+        <tr>
+            <th>引擎</th>
+            <th>描述</th>
+            <th>特征</th>
+            <th>威胁分数</th>
+            <th>可能家族</th>
+            <th>检测耗时</th>
+        </tr>
+        {% for method in analysis.detection %}
+          {% for name, results in method.items %}
+          {% if name == 'DACN' or name == 'IMCLNet' %}
+        <tr>
+            <td>
+              <span>{% if name == 'DACN' %}ECACN{% else %}{{ name }}{% endif %}</span>
+            </td>
+            <td>
+              <span>{{ results.description }}</span>
+            </td>
+            <td>
+              <span>{{ results.feature }}</span>
+            </td>
+            <td>
+              <span>{{ results.score|floatformat:2 }}</span>
+            </td>
+            <td>
+              <span>{{ results.family }}</span>
+            </td>
+            <td>
+              <span>{{ results.inference_time|floatformat:2 }}s</span>
+            </td>
+        </tr>
+          {% endif %}
+          {% endfor %}
+        {% endfor %}
+
+    </table>
+
+    </div>
+  </div>

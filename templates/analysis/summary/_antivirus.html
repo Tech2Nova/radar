@@ -1,0 +1,30 @@
+<div>
+    <div class="static-summary-header">
+      <span class="header—symbol"></span>
+      <span class="header—title">反病毒引擎</span>
+    </div>
+    <table class="static-summary-table">
+    <tr>
+        <th>查杀引擎</th>
+        <th>查杀结果</th>
+        <th>查杀时间</th>
+        <th>查杀版本</th>
+    </tr>
+    {% for engine, results in antivirus.items %}
+    <tr>
+        <td>
+          <span>{{ engine }}</span>
+        </td>
+        <td>
+          <span>{{ results.result }}</span>
+        </td>
+        <td>
+          <span>{{ results.update }}</span>
+        </td>
+        <td>
+          <span>{{ results.version }}</span>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>

@@ -105,7 +105,7 @@ def status(request, task_id):
         )
 
     if task.status == "reported":
-        redirect_url = "/radar/template/analysis/report.html"  # 固定跳转到指定页面
+        redirect_url = "{% url 'analysis.views.index' %}"  # 固定跳转到指定页面
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
         return JsonResponse({"status": "reported", "redirect": redirect_url}) if is_ajax else redirect(redirect_url)
 

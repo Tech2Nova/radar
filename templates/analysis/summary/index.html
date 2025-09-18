@@ -1,0 +1,49 @@
+
+
+<div class="analysis-overview tab-pane" id="analysis-overview" isrunning="false">
+  {% include "analysis/summary/_hawks.html" %}
+
+    <div class="static-warp">
+      <div class="deeplearning-title toggle-menu">
+        <span>静态判定</span>
+        <i class="bi bi-chevron-bar-right" style="display: inline-block;"></i>
+        <i class="bi bi-chevron-bar-up" style="display: none;"></i>
+      </div>
+      <div class="static-summary">
+        {% include "analysis/summary/_antivirus.html" %}
+
+        {% include "analysis/summary/_statics.html" %}
+
+      </div>
+    </div>
+
+    <div class="static-warp">
+      <div class="deeplearning-title toggle-menu">
+        <span>行为判定</span>
+        <i class="bi bi-chevron-bar-right" style="display: inline-block;"></i>
+        <i class="bi bi-chevron-bar-up" style="display: none;"></i>
+      </div>
+      <div class="static-summary">
+        {% include "analysis/summary/_behaviors.html" %}
+
+        {% include "analysis/summary/_networks.html" %}
+      </div>
+
+    </div>
+
+    <div class="static-warp">
+      <div class="deeplearning-title toggle-menu">
+        <span>可视化分析</span>
+        <i class="bi bi-chevron-bar-right" style="display: inline-block;"></i>
+        <i class="bi bi-chevron-bar-up" style="display: none;"></i>
+      </div>
+      <div class="static-summary">
+        {% include "analysis/summary/_malimg.html" %}
+
+        {% include "analysis/summary/_screenshots.html" %}
+      </div>
+
+    </div>
+
+  </div>
+

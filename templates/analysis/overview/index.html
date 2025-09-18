@@ -1,0 +1,19 @@
+{% comment %} <div class="row">
+    <div class="col-md-8">
+        {% if analysis.info.category == "file" and analysis.target %}
+            {% include "analysis/overview/_file.html" %}
+        {% elif analysis.info.category == "url" %}
+            {% include "analysis/overview/_url.html" %}
+        {% endif %}
+    </div>
+</div> {% endcomment %}
+
+{% include "analysis/overview/_chathawk.html" %}
+
+{% comment %} <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Network</h4>
+<div class="row">
+    <div class="col-xs-6">{% include "analysis/network/_dns.html" %}</div>
+    <div class="col-xs-6">{% include "analysis/network/_hosts.html" %}</div>
+</div>
+
+{% include "analysis/overview/_summary.html" %} {% endcomment %}

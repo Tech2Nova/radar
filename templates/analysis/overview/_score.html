@@ -1,0 +1,170 @@
+{% load analysis_tags %}
+<style>
+  .green {
+    color: #047857;
+    background-color: #86efac;
+    border: 1px solid #4ade80;
+    transition: all 0.3s ease;
+  }
+  .green:hover {
+    background-color: #4ade80;
+    transform: translateY(-1px);
+  }
+
+  .red {
+    color: #fff;
+    background-color: #fb7185;
+    border: 1px solid #f43f5e;
+    transition: all 0.3s ease;
+  }
+  .red:hover {
+    background-color: #f43f5e;
+    transform: translateY(-1px);
+  }
+
+  .tabList-item {
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+</style>
+<div class="score">
+  <div class="score-circle"
+  style="background: conic-gradient(#ff6b6b {{ analysis.info.score|to_percentage|floatformat:2 }}%,#e0e0e0 0);">
+    <div class="score-inner-circle">
+      <span class="score-value">{{ analysis.info.score }}</span>
+    </div>
+  </div>
+  <div class="detection-level">
+    {% if analysis.info.score < 0.1 %} 
+    <span class="score-label">良性</span>
+    {% elif analysis.info.score < 2.1 %} 
+      <span class="score-label">低危</span>
+    {% elif analysis.info.score < 5.5 %} 
+      <span class="score-label">中危</span>
+    {% elif analysis.info.score < 8.6 %} 
+      <span class="score-label">高危</span>
+    {% elif analysis.info.score < 9.9 %} 
+      <span class="score-label">极危</span>
+    {% else %}
+      <span class="score-label">0-day</span>
+    {% endif %}
+  </div>
+</div>
+
+<div class="detail-overview">
+    <div class="detail-overview_summary">
+      <div class="detail-overview_count">
+        {% if analysis.virustotal.summary.positives %} 
+        <i class="bi bi-radioactiv"></i>
+        <span>{{ analysis.virustotal.summary.positives }}</span>
+        <span>个模型检测该样本为恶意！</span>
+        {% else %}
+          <i class="bi-check-circle-fill"></i>
+          <span>该样本未表现出任何异常！</span>
+        {% endif %}
+  </div>
+      <div class="detail-overview_resubmit">
+        <a href="{% url "submission.views.resubmit" analysis.info.id %}">
+          <i class="bi bi-arrow-repeat"></i>
+          <span>重新分析</span>
+        </a>
+      </div>
+      <div class="">
+        <a href="{% url "analysis.views.file" "sample" analysis.target.file_id %}">
+          <i class="bi bi-cloud-arrow-down"></i>
+          <span>下载样本</span>
+        </a>
+      </div>
+      <div class="sub_menu">
+        <a id="toggle-menu">
+          <span>更多</span>
+          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-chevron-up" style="display: none;"></i>
+        </a>
+        <div class="menu_more" style="display: none;">
+          <a href="{% url "compare.views.left" analysis.info.id %}">
+            <i class="bi bi-input-cursor"></i>
+            <span>对比分析</span>
+          </a>
+          <a href="{% url "analysis.views.export_analysis" analysis.info.id %}">
+            <i class="bi bi-send"></i>
+            <span>导出报告</span>
+          </a>
+          <a href="{% url "analysis.views.remove" analysis.info.id %}">
+            <i class="bi bi-trash"></i>
+            <span>删除任务</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="summary_items">
+      <div class="detail-overview_items">
+      <div class="sha256_name">
+        <p class="text-truncate">{{ analysis.target.file.sha256 }}</p>
+        <p class="text-truncate">{{ analysis.target.file.name }}</p>
+      </div>
+      <span class="vr-1px"></span>
+      <div class="detail-overview_metrics">
+        <p>分析耗时</p>
+        <span>{{ analysis.info.duration }}s</span>
+      </div>
+      <span class="vr-1px"></span>
+      <div class="detail-overview_metrics">
+        <p>最近分析</p>
+        <span>{{ analysis.info.ended | time_ago }}</span>
+      </div>
+      <span class="vr-1px"></span>
+      <div class="detail-overview_metrics">
+        <p>文件大小</p>
+        <span>{{ analysis.target.file.size | sizeof_fmt }}</span>
+      </div>
+      <span class="vr-1px"></span>
+      <div class="detail-overview_type">
+        <a>
+          <i class="bi bi-filetype-exe"></i>
+        </a>
+      </div>
+    </div>
+
+  <div class="detail-overview_tags">
+    {% if analysis.info.score > 0.1 %} 
+      <span class="tabList-item green">无毒</span>
+    {% elif analysis.info.score < 2.1 %} 
+      <span class="tabList-item red">静态报毒</span>
+      <span class="tabList-item red">动态报毒</span>
+    {% endif %}
+  
+    {% with virustotal=analysis.virustotal.normalized %}
+      {% if virustotal.cve and virustotal.cve != 'none' %}
+      <span class="tabList-item">{{ virustotal.cve|upper }}</span>
+      {% endif %}
+  
+      {% if virustotal.cve and virustotal.platform != 'none' %}
+      <span class="tabList-item">{{ virustotal.platform|decode_bytes|upper }}</span>
+      {% endif %}
+  
+      {% if virustotal.cve and virustotal.metatype != 'none' %}
+      <span class="tabList-item">{{ virustotal.metatype|decode_bytes|upper }}</span>
+      {% endif %}
+  
+      {% if virustotal.cve and virustotal.type != 'none' %}
+      <span class="tabList-item">{{ virustotal.type|decode_bytes|upper }}</span>
+      {% endif %}
+  
+      {% if virustotal.cve and virustotal.family != 'none' %}
+      <span class="tabList-item">{{ virustotal.family|decode_bytes|upper }}</span>
+      {% endif %}
+  
+      {% endwith %}
+  </div>
+</div>
+
+
+</div>
+
+
