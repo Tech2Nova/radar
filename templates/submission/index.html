@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div style="width: 800px; margin: 0 auto;">
+    <div class="logo-description">
+        <div class="logo-smarthawk">
+            <img src="{% static 'graphic/logo.png' %}" />
+            <span>RADAR</span>
+        </div>
+        <p>动静态分析全面集成，接入自研深度学习查杀引擎，<br> 支持AI智能对话，提供详尽的安全分析报告。</p>
+    </div>
+
+    <form role="form" id="upload-form" action="{% url 'index' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="tabbable" style="display: block;">
+            <div class="tab-content" style="display: block;">
+                <div class="tab-pane fade in active" id="file" style="display: flex;">
+                    <div class="tab-submit">
+                        {% if resubmit == "file" %}
+                        <i class="bi bi-check"></i>
+                        <span>重新上传的文件</span>
+                        {% endif %}
+                        <input name="category" type="hidden" value="file">
+                        {% if dropped_file %}
+                        <input name="dropped_file" type="hidden" value="dropped_file">
+                        {% endif %}
+                    </div>
+                    <div class="input-group col-md-6" style="width: 100%;">
+                        <div class="submit-file">
+                            {% if resubmit %}
+                                <input type="text" class="file-names" disabled value="{{file_name}}">
+                                <input name="sample_id" type="text" class="form-control hidden" value="{{sample_id}}">
+                            {% else %}
+                                <i class="bi bi-fingerprint"></i>
+                                <span class="btn-file" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; border: none; padding: 8px 25px; border-radius: 12px; font-weight: 500; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.3s ease; line-height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; gap: 8px;">
+                                    <i class="bi bi-folder2-open" style="font-size: 24px; display: flex; align-items: center;"></i> 选择文件
+                                    <input type="file" name="sample" multiple="multiple" onchange="handleFileUpload()" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;">
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-filename" style="display: none;">
+            <i class="bi bi-check"></i>
+            <span>上传的文件</span>
+            <input type="text" class="file-names" disabled value="" style="display: block;">
+        </div>
+        {# {% include "submission/options.html" %} #}
+
+        <div class="resubmit" style="{% if resubmit %}display: block;{% else %}display: none;{% endif %}">
+            <button type="submit" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; border: none; padding: 8px 25px; border-radius: 12px; font-weight: 500; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.3s ease; line-height: 24px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="bi bi-cloud-upload"></i> 提交
+            </button>
+        </div>
+    </form>
+    <div class="hawk-claim" style="{% if resubmit %}display: none;{% else %}display: block;{% endif %}">
+        <span>为保护你的隐私，请勿提交任何个人信息。我们对你提交的内容不承担任何责任，检测结果仅供参考。</span>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    // 文件选择时更新显示
+    function handleFileUpload() {
+        const input = document.querySelector('input[name="sample"]');
+        const fileNames = Array.from(input.files).map(file => file.name).join(", ");
+        const uploadFilename = document.querySelector(".upload-filename .file-names");
+        uploadFilename.value = fileNames;
+        document.querySelector(".upload-filename").style.display = "block";
+        document.querySelector('input[name="category"]').value = 'file';
+    }
+
+    // 提交表单（使用 AJAX）
+    document.querySelector('#upload-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const fileInput = document.querySelector('input[name="sample"]');
+        if (!fileInput || fileInput.files.length === 0) {
+            alert('请先选择文件！');
+            return;
+        }
+
+        const formData = new FormData(this);
+        fetch('{% url "index" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value,
+                'X-Requested-With': 'XMLHttpRequest' // 明确标记为 AJAX 请求
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                // 检查非 200 状态码
+                if (response.status === 403) {
+                    throw new Error('CSRF 验证失败，请刷新页面重试');
+                } else if (response.status === 400) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || '无效请求');
+                    });
+                } else {
+                    throw new Error(`服务器错误：${response.status}`);
+                }
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                alert('提交失败：' + data.error);
+            } else if (data.task_id) {
+                window.location.href = `{% url 'submission.views.complete' %}?task_id=${data.task_id}`;
+            } else {
+                alert('提交失败：未收到 task_id');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('提交失败：' + error.message);
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

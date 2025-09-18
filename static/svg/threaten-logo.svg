@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 threaten-logo.svg 页-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="2.90546in" height="1.00235in"
+		viewBox="0 0 209.193 72.1694" xml:space="preserve" color-interpolation-filters="sRGB" class="st4">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false"/>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:none;stroke:none;stroke-width:0.25}
+		.st2 {fill:#ffffff;font-family:黑体;font-size:1.99999em}
+		.st3 {fill:#ffffff;font-family:华光标题宋_CNKI;font-size:1.99999em}
+		.st4 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape2-1" v:mID="2" v:groupContext="shape" transform="translate(0.25,-0.25)">
+			<title>工作表.2</title>
+			<desc>威胁态势分析</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="104.346" cy="52.9962" width="208.7" height="38.3465"/>
+			<rect x="0" y="33.823" width="208.693" height="38.3465" class="st1"/>
+			<text x="32.35" y="60.48" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>威胁态势分析</text>		</g>
+		<g id="shape4-4" v:mID="4" v:groupContext="shape" transform="translate(28.5965,-47.7697)">
+			<title>工作表.4</title>
+			<desc>SmartHawk</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="62.1694" width="152" height="20"/>
+			<rect x="0" y="52.1694" width="152" height="20" class="st1"/>
+			<text x="8.31" y="69.37" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>707-RADAR</text>		</g>
+	</g>
+</svg>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div style="width: 800px; margin: 0 auto;color: #ffffff;">
+    <h2>上传成功</h2>
+    <p>已上传 {{ files_count }} 个文件：</p>
+    <ul>
+        {% for file in files %}
+            <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
+    <p>任务 ID: {{ task_id }}</p>
+    <p>正在跳转到状态页面...</p>
+</div>
+
+<script>
+    setTimeout(() => {
+        window.location.href = '{% url "submission.views.status" task_id %}';
+    }, 1000);
+</script>
+{% endblock %}

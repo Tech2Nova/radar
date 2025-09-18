@@ -1,0 +1,363 @@
+.svg-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.advance-panel {
+    height: 422px;
+    overflow-y: auto;
+}
+
+.advance-panel::-webkit-scrollbar {
+    height: 100px !important;
+    width: 5px;
+}
+
+.advance-panel::-webkit-scrollbar-thumb {
+    background: rgb(191, 191, 191);
+    border-radius: 5px;
+}
+
+.dashed-line {
+    border-top: 1px dashed #ccc;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.ring_chart {
+    width: 45%;
+    height: 280px;
+}
+
+.ring_chart .ring_chart_right {
+    border-left: 1px dashed #ccc;
+
+}
+
+.pie-chart {
+    width: 100%;
+    height: 280px;
+}
+
+
+.card {
+    box-sizing: border-box;
+    box-shadow: 0 0 24px 0 #eee;
+    border-radius: 2px;
+    width: 100%;
+    height: 350px;
+    border: 1px solid #ccc;
+    margin-bottom: 50px;
+}
+
+
+.card .content .left {
+    width: 50%;
+}
+
+.card .content .right {
+    width: 50%;
+}
+
+.card .card-title {
+
+    font-weight: 700;
+    color: black;
+    padding-top: 10px;
+    padding-left: 40px;
+}
+
+.card .content {
+    display: flex;
+    width: 100%;
+    height: 274px;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.card .content .tag {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 28px;
+    line-height: 28px;
+    background-size: 8px 8px;
+    margin-bottom: 20px;
+    border-left: 2px solid #337ab7;
+    font-size: 14px;
+    color: black;
+    box-sizing: border-box;
+}
+
+.card .content .tag .flex {
+    display: flex;
+    justify-content: space-between;
+    background-color: #eee;
+    flex: 1;
+}
+
+.card .content .tag .tagLeft {
+    padding-left: 12px;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 222px;
+}
+
+.card .content .tag .tagCount {
+    font-family: DIN Alternate Bold;
+    font-weight: 500;
+}
+
+.card .content .right {
+    border-left: 1px dashed #ccc;
+    margin-left: 21px;
+    padding-left: 21px;
+}
+
+.card .content .tag .range {
+    display: inline-block;
+    padding: 1px 3px;
+    line-height: 14px;
+    border: 1px solid #fcad14;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #fcad14;
+    transform: scale(.67);
+}
+
+
+.vcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.homepage-description p {
+    text-align: center;
+    font-size: 10px;
+    font-family: 'Arial', sans-serif;
+    color: black;
+    line-height: 2;
+    overflow: hidden;
+}
+
+/* 关键帧动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 逐行逐个显示文字 */
+.homepage-description p {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* 应用动画效果 */
+.homepage-description p:nth-child(1) {
+    animation-delay: 0s;
+
+}
+
+.homepage-description p:nth-child(2) {
+    animation-delay: 0.7s;
+}
+
+.dashed-line {
+    border-top: 1px dashed #ccc;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart {
+    width: 45%;
+    height: 300px;
+}
+
+.chart .chart_right {
+    border-left: 1px dashed #ccc;
+
+}
+
+.card {
+    box-sizing: border-box;
+    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.5); /* 深色阴影，增加立体感 */
+    border-radius: 4px; /* 略增大圆角，适应深色风格 */
+    width: 100%;
+    height: 350px;
+    border: 1px solid #4A5568; /* 深色边框，替换 #ccc */
+    margin-bottom: 50px;
+    background-color: #252c42; /* 深色背景 */
+}
+
+.card .content .left {
+    width: 50%;
+}
+
+.card .content .right {
+    width: 50%;
+}
+
+.card .card-title {
+    font-weight: 700;
+    color: #E0E0E0; /* 浅灰色标题，醒目且可读 */
+    padding-top: 10px;
+    padding-left: 40px;
+}
+
+.card .content {
+    display: flex;
+    width: 100%;
+    height: 274px;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.card .content .tag {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    line-height: 28px;
+    background-size: 8px 8px;
+    margin-bottom: 20px;
+    border-left: 2px solid #F56565; /* 红色边框，突出标签 */
+    font-size: 14px;
+    color: #CBD5E0; /* 浅灰蓝色文字，适合深色背景 */
+    box-sizing: border-box;
+    background-color: #2D3748; /* 深色背景，略比卡片亮 */
+}
+
+.card .content .tag .flex {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2D3748; /* 与 .tag 一致 */
+    flex: 1;
+}
+
+.card .content .tag .tagLeft {
+    padding-left: 12px;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 222px;
+    color: #A0AEC0; /* 稍深的灰色，用于标签名称，区分于计数 */
+}
+
+.card .content .tag .tagCount {
+    font-family: DIN Alternate Bold;
+    font-weight: 500;
+    color: #63B3ED; /* 蓝色高亮，用于计数，增加层次感 */
+}
+
+.card .content .right {
+    border-left: 1px dashed #718096; /* 深色虚线，替换 #ccc */
+    margin-left: 21px;
+    padding-left: 21px;
+}
+
+.card .content .tag .range {
+    display: inline-block;
+    padding: 1px 3px;
+    line-height: 14px;
+    border: 1px solid #F6AD55; /* 橙色边框，突出 TOP 标签 */
+    border-radius: 2px;
+    font-size: 12px;
+    color: #F6AD55; /* 橙色文字，与边框一致 */
+    transform: scale(.67);
+}
+
+.card .content .tag-white {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    line-height: 28px;
+    background-size: 8px 8px;
+    margin-bottom: 20px;
+    border-left: 2px solid transparent;
+    font-size: 14px;
+    color: #CBD5E0; /* 浅灰蓝色文字，适合深色背景 */
+    box-sizing: border-box;
+    background-color: #2D3748; /* 深色背景，与 .tag 一致 */
+}
+
+.card .content .tag-white .flex {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2D3748; /* 与 .tag-white 一致 */
+    flex: 1;
+}
+
+.card .content .tag-white .tagLeft {
+    padding-left: 12px;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 222px;
+    color: #A0AEC0; /* 稍深的灰色，用于标签名称 */
+}
+
+.card .content .tag-white .tagCount {
+    font-family: DIN Alternate Bold;
+    font-weight: 500;
+    color: #68D391; /* 绿色高亮，用于计数，与 .tag 的计数区分 */
+}
+
+.card .content .tag-white .range {
+    display: inline-block;
+    padding: 1px 3px;
+    line-height: 14px;
+    border: 1px solid #F6AD55; /* 橙色边框，与 .tag 一致 */
+    border-radius: 2px;
+    font-size: 12px;
+    color: #F6AD55; /* 橙色文字 */
+    transform: scale(.67);
+}
+
+
+
+
+
+.input_container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* .input_container .left, .right {
+    flex: 1; 
+}
+
+.input_container .left {
+    margin-right: 10px; 
+} */

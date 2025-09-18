@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>707-radar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="智能防护，深度洞察，安全无忧！">
+    <meta name="author" content="Torrk@conimi.com">
+
+    <!-- Le styles -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lightbox.css' %}" rel="stylesheet">
+    <link href="{% static 'css/new.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/avv.css' %}" rel="stylesheet">
+
+    <script src="{% static 'js/marked.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/avv.js' %}" defer></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-inner">
+            <div class="header-logo">
+                <a href="{% url 'submission.views.index' %}">
+                    <img src="{% static 'graphic/logo.png' %}" />
+                </a>
+            </div>
+            <div class="nav-content">
+{#                <div class="search-container">#}
+{#                    <button type="button">#}
+{#                        <a href="{% url 'analysis.views.search' %}">#}
+{#                            <i class="bi bi-search"></i>#}
+{#                        </a>#}
+{#                    </button>#}
+{#                    <input type="text" placeholder="输入MD5、SHA1、SHA256 以检索分析报告">#}
+{#                </div>#}
+                <div class="contain-menu">
+{#                    <div>#}
+{#                        <a href="{% url 'realtime.views.index' %}">#}
+{#                            <i class="bi bi-clipboard-pulse"></i>#}
+{#                            <span>实时检测</span>#}
+{#                        </a>#}
+{#                    </div>#}
+                    <div>
+                        <a href="{% url 'submission.views.index' %}">
+                            <i class="bi bi-upload"></i>
+                            <span>提交样本</span>
+                        </a>
+                    </div>
+{#                    <div>#}
+{#                        <a href="{% url 'dashboard.views.index' %}">#}
+{#                            <i class="bi bi-globe-asia-australia"></i>#}
+{#                            <span>威胁感知</span>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <a href="{% url 'analysis.views.index' %}">#}
+{#                            <i class="bi bi-grid"></i>#}
+{#                            <span>任务中心</span>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <a href="{% url 'analysis.views.index' %}">#}
+{#                            <i class="bi bi-grid"></i>#}
+{#                            <span>任务中心</span>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <a href="{% url 'analysis.views.index' %}">#}
+{#                            <i class="bi bi-person-circle"></i>#}
+{#                            <span>登录</span>#}
+{#                        </a>#}
+{#                    </div>#}
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+

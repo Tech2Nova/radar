@@ -1,0 +1,89 @@
+<div class="options" id="accordion" style="{% if resubmit %}display: block;{% else %}display: none;{% endif %}">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#options">
+                <i class="bi bi-alt"></i>
+                <span>高级选项</span>
+            </a>
+        </div>
+        <div id="options" class="panel-collapse {% if resubmit %}in{% endif %}" style="text-align: left;">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="form_package">Analysis Package</label>
+                    <select class="form-control" id="form_package" name="package">
+                        <option value="" active>自动检测</option>
+                        {% for package in packages %}
+                        <option value="{{package}}">{{package}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="form_timeout">超时<small>(单位：秒)</small></label>
+                    <input type="text" class="form-control" id="form_timeout" name="timeout" placeholder="60" />
+                </div>
+                <div class="form-group">
+                    <label for="form_options">选项</label>
+                    <input type="text" class="form-control" id="form_options" name="options" value="{{ options }}" />
+                </div>
+                <div class="form-group">
+                    <label for="form_priority">优先级</label>
+                    <select class="form-control" id="form_priority" name="priority">
+                        <option value="1">高</option>
+                        <option value="2">中</option>
+                        <option value="3">低</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="form_machine">运行环境</label>
+                    <select class="form-control" id="form_machine" name="machine">
+                    {% for id,label in machines %}
+                        <option value="{{id}}">{{label}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="form_custom">自定义</label>
+                    <input type="text" class="form-control" id="form_custom" name="custom" />
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="free" /> 无注入 <span class="text-muted"><small>(禁用行为分析)</small></span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="process_memory" checked /> 进程内存转储
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="memory" /> 完整内存转储 <span class="text-muted"><small>(如果启用了“内存”处理模块，将启动Volatility分析。
+
+                            )</small></span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="enforce_timeout" /> 强制超时
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="human" checked />启用模拟人类交互</input>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="services" />启用服务 <span class="text-muted"><small>(启用辅助配置中指定的模拟环境)</small></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="form_tags">标签</label>
+                    <input type="text" class="form-control" id="form_tags" name="tags" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
