@@ -28,7 +28,7 @@ import submission.views
 urlpatterns = [
     path("", submission.views.index, name='index'),  # 使用path替代url
     path("submission/", include("submission.urls")),  # 包含提交模块的URL
-    path('analysis/', include('radar.analysis.urls')),
+    path('analysis/', include('analysis.urls')),
 
 ]
 #
