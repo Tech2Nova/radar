@@ -89,7 +89,7 @@
         .then(data => {
             console.log('状态响应:', data); // 调试日志
             if (data.status === 'reported') {
-                window.location.href = '/radar/template/analysis/report.html';
+                window.location.href = 'analysis/report.html';
             } else {
                 setTimeout(() => pollStatus(taskId), 1000); // 每秒轮询
             }
