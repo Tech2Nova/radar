@@ -2,8 +2,8 @@
     {% if analysis.status == "reported" %}
     <div class="task-item tab-pane fade in active" id="files">
         <div class="task-score">
-            <div class="task-score-circle"
-            style="background: conic-gradient(#ff6b6b {{ analysis.score|to_percentage|floatformat:2 }}%,#e0e0e0 0);">
+            <div class="task-score-circle">
+{#                style="background: conic-gradient(#ff6b6b {{ analysis.score|to_percentage|floatformat:2 }}%,#e0e0e0 0);"#}
             <div class="task-score-inner-circle">
                 <span>{{ analysis.score }}</span>
             </div>
@@ -17,7 +17,7 @@
                 <span>unknown</span>
             {% endif %}
 
-            <span>{{ analysis.size|sizeof_fmt }}</span>
+{#            <span>{{ analysis.size|sizeof_fmt }}</span>#}
             <span>{{ analysis.clock }}首次发现！</span>
             </div>
             <div class="task-result-labels">
@@ -35,15 +35,15 @@
                     <span>0-day</span>
                 {% endif %}
 
-        {% if analysis.labels %}
-            {% with analysis.labels|split:"," as split_list %}
-                {% for item in split_list %}
-                    {% if item != 'none' %}
-                        <span>{{ item }}</span>
-                    {% endif %}
-                {% endfor %}
-            {% endwith %}
-        {% endif %}
+{#        {% if analysis.labels %}#}
+{#            {% with analysis.labels|split:"," as split_list %}#}
+{#                {% for item in split_list %}#}
+{#                    {% if item != 'none' %}#}
+{#                        <span>{{ item }}</span>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            {% endwith %}#}
+{#        {% endif %}#}
         </div>
             {% comment %} {{ analysis.labels }} {% endcomment %}
         </div>

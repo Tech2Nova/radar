@@ -1394,7 +1394,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #333;
+    color: #ffffff;
     background-color: #fff
 }
 
@@ -5997,10 +5997,10 @@ a.thumbnail:hover {
 
 .alert {
     padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
+    /*margin-bottom: 20px;*/
+    /*border: 1px solid transparent;*/
     border-radius: 4px;
-    height: 350px;
+    height: 300px;
 }
 
 .alert h4 {
@@ -6077,9 +6077,10 @@ a.thumbnail:hover {
 }
 
 .alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1
+    color: #f56154;
+    /*background-color: #f2dede;*/
+    background-color: #252c42;
+    /*border-color: #ebccd1*/
 }
 
 .alert-danger hr {
@@ -6269,8 +6270,9 @@ a.thumbnail:hover {
     display: block;
     padding: 10px 15px;
     margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid #ddd
+    background-color: #252c42;
+    border: 1px solid #ddd;
+    color: white;
 }
 
 .list-group-item:first-child {

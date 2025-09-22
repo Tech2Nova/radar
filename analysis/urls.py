@@ -14,6 +14,7 @@ from .views import chat_view, get_response
 
 urlpatterns = [
     path("", views.index, name='analysis.views.index'),  # 首页
+    path("search/", views.search, name='analysis.views.search'),  # 搜索
 ]
 
 # path("<int:task_id>/", views.report, name='analysis.views.report'),  # 任务报告
@@ -23,7 +24,7 @@ urlpatterns = [
 # path("filtered/<int:task_id>/<int:pid>/<str:category>/", views.filtered_chunk,
 #      name='analysis.views.filtered_chunk'),  # 过滤数据块
 # path("search/<int:task_id>/", views.search_behavior, name='analysis.views.search_behavior'),  # 搜索行为
-# path("search/", views.search, name='analysis.views.search'),  # 搜索
+
 # path("pending/", views.pending, name='analysis.views.pending'),  # 待处理
 # path("<int:task_id>/pcapstream/<str:conntuple>/", views.pcapstream, name='analysis.views.pcapstream'),  # pcap流
 # re_path(

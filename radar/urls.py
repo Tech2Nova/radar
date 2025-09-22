@@ -30,6 +30,8 @@ urlpatterns = [
     path("", submission.views.index, name='index'),  # 使用path替代url
     path("submission/", include("submission.urls")),  # 包含提交模块的URL
     path("analysis/", include("analysis.urls")),
+    path("realtime/", include("realtime.urls")),  # 包含实时检测模块的URL
+    path("dashboard/", include("dashboard.urls")),  # 包含仪表板模块的URL
 
 ]
 #

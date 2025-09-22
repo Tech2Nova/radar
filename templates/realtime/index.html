@@ -1,0 +1,372 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- 页面上方开关 + 系统信息容器 -->
+<div class="monitor-top-row">
+    <!-- 左侧：硬件性能信息 -->
+    <div class="system-info-container">
+        <!-- GPU信息 -->
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">GPU 0:</span> <span class="info-value">Intel(R) UHD Graphics 770</span></div>
+            <div class="info-item"><span class="info-label">驱动程序版本:</span> <span class="info-value">32.0.101.6881</span></div>
+            <div class="info-item"><span class="info-label">驱动程序日期:</span> <span class="info-value">2025/6/4</span></div>
+            <div class="info-item"><span class="info-label">DirectX 版本:</span> <span class="info-value">12 (FL 12.1)</span></div>
+        </div>
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">GPU 1:</span> <span class="info-value">NVIDIA GeForce GTX 1660 SUPER</span></div>
+            <div class="info-item"><span class="info-label">驱动程序版本:</span> <span class="info-value">32.0.15.7683</span></div>
+            <div class="info-item"><span class="info-label">驱动程序日期:</span> <span class="info-value">2025/6/17</span></div>
+            <div class="info-item"><span class="info-label">DirectX 版本:</span> <span class="info-value">12 (FL 12.1)</span></div>
+        </div>
+        <!-- CPU信息 -->
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">CPU:</span> <span class="info-value">12th Gen Intel(R) Core(TM) i9-12900</span></div>
+            <div class="info-item"><span class="info-label">基准速度:</span> <span class="info-value">2.40 GHz</span></div>
+            <div class="info-item"><span class="info-label">插槽:</span> <span class="info-value">1</span></div>
+            <div class="info-item"><span class="info-label">内核:</span> <span class="info-value">16</span></div>
+        </div>
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">逻辑处理器:</span> <span class="info-value">24</span></div>
+            <div class="info-item"><span class="info-label">虚拟化:</span> <span class="info-value">已启用</span></div>
+            <div class="info-item"><span class="info-label">磁盘 0 (C:)</span> <span class="info-value">NVMe Micron 2450 NVMe 1024GB</span></div>
+            <div class="info-item"><span class="info-label">容量:</span> <span class="info-value">954 GB</span></div>
+        </div>
+        <!-- 无线网络信息 -->
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">无线适配器:</span> <span class="info-value">Intel(R) Wireless-AC 9462</span></div>
+            <div class="info-item"><span class="info-label">适配器名称:</span> <span class="info-value">WLAN</span></div>
+            <div class="info-item"><span class="info-label">SSID:</span> <span class="info-value">NKU_WLAN</span></div>
+            <div class="info-item"><span class="info-label">连接类型:</span> <span class="info-value">802.11ac</span></div>
+        </div>
+    </div>
+
+    <!-- 右侧开关 -->
+    <div class="monitor-toggle-container-horizontal">
+        <label class="monitor-switch">
+            <input type="checkbox" id="toggleRun">
+            <span class="monitor-slider"></span>
+            <span class="monitor-slider-circle"></span>
+        </label>
+        <div class="monitor-toggle-text-horizontal">
+            实时监测
+            <span class="monitor-toggle-subtext-horizontal">监测并判断系统中的恶意进程</span>
+        </div>
+    </div>
+</div>
+    
+<div class="dashed-line"></div>
+    
+<!-- 单行布局：左边折线图，右边日志信息 -->
+<div class="row-container">
+    <!-- 左边：PCIe & 其他指标折线图 -->
+    <div class="col-md-6" style="display:flex; flex-direction:column; gap:5px;">
+        <div class="window-title">GPU HPC计数值</div>
+        <div style="display:flex; gap:5px; flex:1; height:350px;">
+            <!-- 左列 4 指标 -->
+            <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
+                <div class="cpu-window" id="pcie-write-bar0" style="flex:1;"></div>
+                <div class="cpu-window" id="pcie-read-bar0" style="flex:1;"></div>
+                <div class="cpu-window" id="pcie-write-bw" style="flex:1;"></div>
+                <div class="cpu-window" id="pcie-read-bw" style="flex:1;"></div>
+            </div>
+            <!-- 右列 4 指标 -->
+            <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
+                <div class="cpu-window" id="l1-shared-throughput" style="flex:1;"></div>
+                <div class="cpu-window" id="l1-surface-throughput" style="flex:1;"></div>
+                <div class="cpu-window" id="l1-hit-rate" style="flex:1;"></div>
+                <div class="cpu-window" id="l2-bandwidth" style="flex:1;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右边：日志信息 -->
+    <div class="col-md-6">
+        <div class="window-container">
+            <div class="window-title"><i class="bi bi-robot"></i>&emsp;日志信息</div>
+            <div class="log-window" id="logWindow">
+                <div class="recent-alerts">
+                    <ul>
+                        <!-- 日志内容显示在这里 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="space"></div>
+
+<style>
+/* 顶部一行容器 */
+.monitor-top-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+/* 系统信息容器 */
+.system-info-container {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: #c5c5c5;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+.info-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.info-value {
+    flex: 1;
+}
+
+/* 水平布局容器 */
+.monitor-toggle-container-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 15px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 文字样式 */
+.monitor-toggle-text-horizontal {
+    font-size: 14px;
+    color: #c5c5c5;
+    line-height: 1.2;
+}
+
+.monitor-toggle-subtext-horizontal {
+    display: block;
+    font-size: 12px;
+    color: #a0a0a0;
+}
+
+/* 开关样式 */
+.monitor-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.monitor-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.monitor-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 14px;
+}
+
+.monitor-slider-circle {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 开关选中状态 */
+.monitor-switch input:checked + .monitor-slider {
+    background-color: #8ea9f7;
+}
+
+.monitor-switch input:checked + .monitor-slider + .monitor-slider-circle {
+    transform: translateX(22px);
+}
+
+/* 单行容器 */
+.row-container {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin: 20px;
+}
+
+.col-md-6 {
+    flex: 1;
+}
+
+.window-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.window-title {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #6db4b0;
+    background-color: #213d43;
+    padding: 6px 12px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 2px solid #444;
+}
+
+.log-window {
+    color: #dcdcdc;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    border: 2px solid #444;
+    border-radius: 0 0 6px 6px;
+    height: 350px;
+    overflow: hidden;
+}
+
+.cpu-window {
+    background-color: #252535;
+    border-radius: 0 0 6px 6px;
+    border: 2px solid #444;
+}
+
+.log-normal {
+    color: #5faa98;
+    border-left: 2px solid green;
+    padding-left: 8px;
+}
+
+.log-poison {
+    color: #f56154;
+    border-left: 2px solid red;
+    padding-left: 8px;
+}
+
+.space {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    let running = false;
+    const toggle = document.getElementById("toggleRun");
+    toggle.addEventListener("change", (e) => { running = e.target.checked; });
+
+    // ====== 日志窗口 ======
+    function addLog(msg, type) {
+        const logList = document.querySelector("#logWindow .recent-alerts ul");
+        if (!logList) return;
+        const timeStr = new Date().toLocaleTimeString();
+        const colorClass = type === "normal" ? "log-normal" : type === "poison" ? "log-poison" : "";
+        const newItem = document.createElement("li");
+        newItem.innerHTML = `<span>[${timeStr}] ${msg}</span>`;
+        newItem.className = colorClass;
+        logList.prepend(newItem);
+        while (logList.children.length > 20) logList.removeChild(logList.lastChild);
+    }
+
+    function refreshLogs() {
+        if (!running) return;
+        if (Math.random() < 0.7) {
+            addLog(`模型训练正常，无异常检测到。`, "normal");
+        } else {
+            addLog(`检测到投毒/后门攻击！模型可能被入侵。`, "poison");
+        }
+    }
+
+    // ====== PCIe & 其他指标折线图 ======
+    const cpuCharts = [];
+    const cpuDataArr = [];
+    const cpuIds = [
+        'pcie-write-bar0',
+        'pcie-read-bar0',
+        'pcie-write-bw',
+        'pcie-read-bw',
+        'l1-shared-throughput',
+        'l1-surface-throughput',
+        'l1-hit-rate',
+        'l2-bandwidth'
+    ];
+    const chartTitles = [
+        'PCIe Write BAR0',
+        'PCIe Read BAR0',
+        'PCIe Write BW',
+        'PCIe Read BW',
+        'L1 Shared Throughput',
+        'L1 Surface Throughput',
+        'L1 Hit Rate',
+        'L2 Bandwidth'
+    ];
+    const timeWindow = 30;
+    let labels = Array(timeWindow).fill('').map((_, i) => i - timeWindow + 1);
+
+    cpuIds.forEach((id, idx) => {
+        cpuCharts[idx] = echarts.init(document.getElementById(id));
+        cpuDataArr[idx] = Array(timeWindow).fill(0);
+
+        const option = {
+            title: {
+                text: chartTitles[idx],
+                left: 'left',
+                top: 'top',
+                textStyle: { color: '#c3ecfa', fontSize: 12, fontWeight: 'bold' }
+            },
+            xAxis: { type: 'category', data: labels, boundaryGap: false, show: false },
+            yAxis: { type: 'value', max: 100, show: false },
+            series: [{
+                data: cpuDataArr[idx],
+                type: 'line',
+                smooth: true,
+                areaStyle: { color: 'rgba(195, 236, 250, 0.3)' },
+                lineStyle: { color: '#c3ecfa', width: 2 },
+            }],
+            grid: { left: '3%', right: '3%', top: '20%', bottom: '10%' }
+        };
+        cpuCharts[idx].setOption(option);
+    });
+
+    function refreshCharts() {
+        if (!running) return;
+        cpuCharts.forEach((chart, idx) => {
+            const newVal = (Math.random() * 60).toFixed(1);
+            cpuDataArr[idx].push(newVal);
+            cpuDataArr[idx].shift();
+            chart.setOption({ series: [{ data: cpuDataArr[idx] }] });
+        });
+    }
+
+    setInterval(refreshLogs, 1000);
+    setInterval(refreshCharts, 1000);
+});
+</script>
+
+{% endblock %}

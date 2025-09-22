@@ -1,0 +1,577 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+
+
+<div
+    style="background-image: url('../../static/graphic/threaten-map.png'); background-size: cover; background-repeat: no-repeat; width: 100%; height: 50vh; position: relative;">
+    <div
+        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
+        <img src="../../static/svg/threaten-logo.svg" alt="">
+    </div>
+</div>
+
+
+<div class="dashed-line"></div>
+
+<div class="">
+
+    <div class="col-md-6">
+        <div class="card chart-container">
+            <div id="ringChart1" class="ring_chart"></div>
+            <div id="ringChart2" class="ring_chart ring_chart_right"></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card chart-container">
+            <div id="pieChart" class="pie-chart"></div>
+        </div>
+
+
+    </div>
+</div>
+
+<!--    获取后端提供的数据
+        var totalTasks = {{ report.total_tasks }};
+        var totalSamples = {{ report.total_samples }}; -->
+
+<script>
+    var ringChart1 = echarts.init(document.getElementById('ringChart1'));
+    var ringChart2 = echarts.init(document.getElementById('ringChart2'));
+
+    // 获取后端数据
+    function fetchData() {
+        var totalTasks = 1563; // 从后端获取的任务总数
+        var totalSamples = 1486; // 从后端获取的样本总数
+        var benign = 345;
+        var malicious = 1189;
+        var suspicious = 29;
+
+        updateRingChart1(totalTasks, totalSamples, 'rgb(0, 143, 225)', 'rgb(0, 218, 166)');
+        updateRingChart2(benign, malicious, suspicious, 'rgb(82, 196, 26)', 'rgb(255, 77, 79)', 'rgb(252, 173, 20)');
+    }
+
+    function updateRingChart1(value1, value2, color1, color2) {
+        ringChart1.setOption({
+            graphic: [
+                {
+                    type: 'text',
+                    left: '40',
+                    top: '20',
+                    style: {
+                        text: '全站任务',
+                        fill: '#aaaaaa',
+                        fontSize: 16,
+                        fontWeight: 'bold'
+                    }
+                },
+                {
+                    type: 'text',
+                    left: 'center',
+                    top: 'center',
+                    style: {
+                        text: '3049',
+                        fill: '#aaaaaa',
+                        fontSize: 20,
+                        fontWeight: 'bold'
+                    }
+                }
+            ],
+            legend: {
+                orient: 'horizontal',
+                bottom: 0,
+                textStyle: {
+                    color: '#AAAAAA'
+                },
+                formatter: function (name) {
+                    var value = 0;
+                    if (name === '总任务数') {
+                        value = value1;
+                    } else if (name === '总样本数') {
+                        value = value2;
+                    }
+                    return name + ' (' + value + ')';
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c}'
+            },
+            series: [{
+                type: 'pie',
+                radius: ['40%', '55%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'inside',
+                    formatter: '{b}: {c}',
+                    fontSize: '10',
+                    fontWeight: 'bold'
+                },
+
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: value1, name: '总任务数', itemStyle: { color: color1 } },
+                    { value: value2, name: '总样本数', itemStyle: { color: color2 } }
+                ]
+            }]
+        });
+    }
+
+
+
+    function updateRingChart2(value1, value2, value3, color1, color2, color3) {
+        ringChart2.setOption({
+            graphic: [{
+                type: 'text',
+                left: 'center',
+                top: 'center',
+                style: {
+                    text: '1563',
+                    fill: '#aaaaaa',
+                    fontSize: 20,
+                    fontWeight: 'bold'
+                }
+            }],
+            legend: {
+                orient: 'horizontal',
+                bottom: -5,
+                textStyle: {
+                    color: '#AAAAAA'
+                },
+                formatter: function (name) {
+                    var value = 0;
+                    if (name === '良性的') {
+                        value = value1;
+                    } if (name === '恶意的') {
+                        value = value2;
+                    } else if (name == '可疑的') {
+                        value = value3
+                    }
+                    return name + ' (' + value + ')';
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c}'
+            },
+            series: [{
+                type: 'pie',
+                radius: ['40%', '55%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'inside',
+                    formatter: '{b}: {c}',
+                    fontSize: '10',
+                    fontWeight: 'bold'
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: value1, name: '良性的', itemStyle: { color: color1 } },
+                    { value: value2, name: '恶意的', itemStyle: { color: color2 } },
+                    { value: value3, name: '可疑的', itemStyle: { color: color3 } }
+                ]
+            }]
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchData);
+</script>
+
+<script>
+    function renderPieChart(nameArray, valueArray) {
+        var pieChartContainer = document.getElementById('pieChart');
+        var chart = echarts.init(pieChartContainer);
+
+        var data = {
+            "title": {
+                "text": "行为特征统计",
+                "left": "40px",
+                "top": "20px",
+                "textStyle": {
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "color": '#aaaaaa'
+                }
+            },
+
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "orient": "vertical",
+                "right": "35",
+                "top": "70",
+                "itemGap": 30,
+                "itemWidth": 30,
+                "itemHeight": 10,
+                textStyle: {
+                    color: '#AAAAAA'
+                },
+                "formatter": function (name) {
+                    var seriesData = data.series[0].data;
+                    var total = 0;
+                    for (var i = 0; i < seriesData.length; i++) {
+                        total += seriesData[i].value;
+                    }
+                    for (var i = 0; i < seriesData.length; i++) {
+                        if (seriesData[i].name === name) {
+                            var percentage = ((seriesData[i].value / total) * 100).toFixed(2); // 计算百分比并保留两位小数
+                            return name + ' (' + percentage + '%)';
+                        }
+                    }
+                }
+
+            },
+            "series": [
+                {
+                    "name": "行为特征",
+                    "type": "pie",
+                    "radius": "75%",
+
+                    center: ['25%', '55%'],
+                    "data": [],
+                    "label": { "show": false },
+                    "emphasis": {
+                        "itemStyle": { "shadowBlur": 10, "shadowOffsetX": 0, "shadowColor": "rgba(0, 0, 0, 0.5)" }
+                    }
+                }
+            ]
+        };
+
+        // 添加传入的name和value到data中
+        for (var i = 0; i < nameArray.length; i++) {
+            data.series[0].data.push({ "name": nameArray[i], "value": valueArray[i] });
+        }
+
+        chart.setOption(data);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var nameArray = ["静态指标", "网络连接", "系统活动", "持久化", "命令执行", "逃避检测", "威胁家族", "其他", "防御逃避", "进程注入"];
+        var valueArray = [8851556, 2066538, 1912787, 500916, 484871, 453775, 432662, 290159, 153753, 142952];
+
+        // 调用函数渲染饼图
+        renderPieChart(nameArray, valueArray);
+    });
+</script>
+
+
+<div class="">
+
+    <div class="col-md-4">
+        <div class="card">
+            <p class="card-title">热门家族</p>
+            <div class="content">
+                <div class="left">
+                    <div class="tag-white"><span class="flex" style="color: rgb(255, 77, 79);"><span
+                                class="tagLeft"><img src="../../static/svg/family-red.svg" alt="">
+                                &nbsp;WINSXSBOT</span><span class="tagCount">27951</span></span><span
+                            class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex" style="color: rgb(255, 143, 70);"><span
+                                class="tagLeft"><img src="../../static/svg/family-orange.svg" alt="">
+                                &nbsp;BEGSEABUG</span><span class="tagCount">21569</span></span><span
+                            class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex" style="color: rgb(252, 173, 20);"><span
+                                class="tagLeft"><img src="../../static/svg/family-yellow.svg" alt="">
+                                &nbsp;ANDROM</span><span class="tagCount">17026</span></span><span
+                            class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;WANNACRYPT</span><span class="tagCount">12115</span></span><span
+                            class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;FARFLI</span><span class="tagCount">9011</span></span><span class="stripe"></span>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;URELAS</span><span class="tagCount">7032</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;银狐</span><span class="tagCount">6757</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;UPATRE</span><span class="tagCount">6740</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;NITOL</span><span class="tagCount">6696</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><img
+                                    src="../../static/svg/family-black.svg" alt="">
+                                &nbsp;RAMNIT</span><span class="tagCount">6407</span></span><span class="stripe"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <p class="card-title">热门标签</p>
+            <div class="content">
+                <div class="left">
+                    <div class="tag"><span class="flex"><span class="tagLeft"
+                                style="color:rgb(255, 109, 111);font-weight: bold;">静态报毒
+                                <span class="range"
+                                    style="color: rgb(255, 109, 111); border-color: rgb(255, 109, 111);">TOP1</span></span><span
+                                class="tagCount">1879869</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft"
+                                style="color: rgb(255, 134, 54);font-weight: bold;">木马 <span class="range"
+                                    style="color: rgb(255, 134, 54); border-color: rgb(255, 134, 54);">TOP2</span></span><span
+                                class="tagCount">1273660</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft"
+                                style="color: rgb(252, 173, 20); font-weight: bold;">释放病毒
+                                <span class="range"
+                                    style="color: rgb(252, 173, 20); border-color: rgb(252, 173, 20);">TOP3</span></span><span
+                                class="tagCount">829132</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft">高危指标 <!----></span><span
+                                class="tagCount">524993</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft">后门 <!----></span><span
+                                class="tagCount">518648</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+
+                </div>
+                <div class="right">
+                    <div class="tag"><span class="flex"><span class="tagLeft">壳</span><span
+                                class="tagCount">201182</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft">蠕虫</span><span
+                                class="tagCount">198660</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft">中危指标</span><span
+                                class="tagCount">178971</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft">SPYWARE</span><span
+                                class="tagCount">167077</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                    <div class="tag"><span class="flex"><span class="tagLeft">勒索病毒</span><span
+                                class="tagCount">160854</span></span><img src="../../static/img/tagRight.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card ">
+            <p class="card-title">热门组织</p>
+            <div class="content ">
+                <div class="left">
+                    <div class="tag-white"><span class="flex" style="color: rgb(255, 77, 79);"><span class="tagLeft">
+                                WINNTI GROUP</span><span class="tagCount">1459</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex" style="color: rgb(255, 143, 70);"><span class="tagLeft">
+                                LAZARUS GROUP</span><span class="tagCount">1448</span></span><span
+                            class="stripe"></span></div>
+                    <div class="tag-white"><span class="flex" style="color: rgb(252, 173, 20);"><span class="tagLeft">
+                                CARBANAK</span><span class="tagCount">722</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span>
+                                TA505</span><span class="tagCount">475</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span>
+                                APT32</span><span class="tagCount">458</span></span><span class="stripe"></span>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span>
+                                DUSTMAN</span><span class="tagCount">444</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class=" flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span>
+                                APT40</span><span class="tagCount">395</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span>
+                                APT28</span><span class="tagCount">326</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span>
+                                POISONIVY</span><span class="tagCount">241</span></span><span class="stripe"></span>
+                    </div>
+                    <div class="tag-white"><span class="flex"><span class="tagLeft"><span
+                                    class="icon family-icon"></span> EVIL
+                                CORP</span><span class="tagCount">185</span></span><span class="stripe"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div>
+
+
+<!-- <div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">全站任务统计</h3>
+    </div>
+    <table class="table table-striped" style="table-layout: fixed;">
+        <thead>
+            <tr>
+                <th>任务状态</th>
+                <th>数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for state, count in report.states_count.items %}
+            <tr>
+                <td>{{state}}</td>
+                <td>{{count}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div> -->
+
+
+<!-- <div class="col-md-4">
+
+    <div class="card" style="margin-top: 35px;">
+        <div class="alert alert-success center">
+            <h4><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Score</h4>
+            <canvas id="success-circle" width="200" height="200"></canvas>
+            <p>这个文件是良性软件，得分为 <strong><span id="score">67.5%。</span></strong></p>
+            <p>
+                <b>请注意</b>: 评分系统仍处于研发阶段，应该被认为是
+                <b><i>测试</i></b> 指标.
+            </p>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="card" style="margin-top: 35px;">
+        <div class="alert alert-info center">
+            <h4><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Score</h4>
+            <canvas id="info-circle" width="200" height="200"></canvas>
+            <p>这个文件表现出一些潜在的恶意行为，得分为 <strong><span id="score">%。</span> </strong></p>
+            <p>
+                <b>请注意</b>: 评分系统仍处于研发阶段，应该被认为是
+                <b><i>测试</i></b> 指标.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="card" style="margin-top: 35px;">
+        <div class="alert alert-warning center">
+            <h4><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Score</h4>
+            <canvas id="warning-circle" width="200" height="200"></canvas>
+            <p>这个文件具有大量的恶意软件行为，得分为 <strong><span id="score">{{analysis.info.score }}%。</span></strong></p>
+            <p>
+                <b>请注意</b>: 评分系统仍处于研发阶段，应该被认为是
+                <b><i>测试</i></b> 指标.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="card" style="margin-top: 35px;">
+        <div class="alert alert-danger center">
+            <h4><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Score</h4>
+            <canvas id="danger-circle" width="200" height="200"></canvas>
+            <p>该文件 <b>非常危险</b>，得分为 <strong><span id="score">{{analysis.info.score }}%!</span></strong></p>
+            <p>
+                <b>请注意</b>: 评分系统仍处于研发阶段，应该被认为是
+                <b><i>测试</i></b> 指标.
+            </p>
+        </div>
+    </div>
+
+
+
+    <script>
+        function drawProgress(canvasId, radius, startColor, endColor, score) {
+            var canvas = document.getElementById(canvasId);
+            var ctx = canvas.getContext("2d");
+
+            var x = canvas.width / 2;
+            var y = canvas.height / 2;
+            var startAngle = -Math.PI / 2;
+            var endAngle = Math.PI * 1.5;
+            var counterClockwise = false;
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = 'lightgrey';
+            ctx.stroke();
+
+            var normalizedScore = score / 100;
+            var progressAngle = normalizedScore * Math.PI * 1.5;
+
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, startAngle + progressAngle, counterClockwise);
+            ctx.lineWidth = 10;
+            var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, startColor);
+            gradient.addColorStop(1, endColor);
+            ctx.strokeStyle = gradient;
+            ctx.stroke();
+
+            if (score !== 0) {
+                ctx.fillStyle = "black";
+                ctx.font = "bold 20px Arial";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(score + "%", x, y);
+            } else {
+                // 绘制对勾
+                ctx.fillStyle = "black";
+                ctx.font = "bold 40px Arial";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("✓", x, y);
+            }
+        }
+
+        // 获取评分值
+        var score = parseFloat(document.getElementById("score").innerText);
+
+        if (score < 1) {
+            drawProgress("success-circle", 80, '#dff0d8', '#3c763d', score);
+        } else if (score < 2) {
+            drawProgress("info-circle", 80, '#d9edf7', '#31708f', score);
+        } else if (score < 5) {
+            drawProgress("warning-circle", 80, '#fcf8e3', '#8a6d3b', score);
+        } else {
+            drawProgress("danger-circle", 80, '#f2dede', '#a94442', score);
+        }
+
+    </script>
+
+
+</div> -->
+
+
+
+{% endblock %}

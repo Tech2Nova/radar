@@ -36,7 +36,7 @@ footer {
     width: 100%;
     /* color: #ccc; */
     margin-top: auto;
-    
+
 }
 
 footer a:link,
@@ -252,4 +252,62 @@ html {
 body::-webkit-scrollbar,
 html::-webkit-scrollbar {
     display: none
+}
+
+.recent-alerts {
+    color: #cccccc;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    line-height: 1;
+}
+
+.recent-alerts ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-alerts li {
+    background-color: #1d2231;
+    padding: 10px 10px;
+    /*border-left: 2px solid #f95959;*/
+    margin-bottom: 5px;
+}
+
+.recent-alerts li:last-child {
+    margin-bottom: 0; /* 移除最后一项的底部外边距，避免多余空隙 */
+    border-bottom: none;
+}
+
+.recent-alerts a {
+    color: #a0c4ff;
+    text-decoration: none;
+}
+
+.recent-alerts a:hover {
+    text-decoration: underline;
+}
+
+.file-info {
+    color: #cccccc;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    line-height: 1;
+}
+
+.file-info {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-info li {
+    padding: 10px 10px;
+    margin-bottom: 5px;
+}
+
+.file-info ul li {
+  line-height: 1.8; /* 默认值为 1.2 左右，增加到 1.6 或更高 */
 }

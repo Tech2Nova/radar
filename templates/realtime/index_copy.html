@@ -1,0 +1,473 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{#<div class="dashed-line"></div>#}
+
+
+
+<!-- 页面上方开关 + CPU 信息容器 -->
+<div class="monitor-top-row">
+
+
+    <!-- 左侧：硬件性能 信息，多列 -->
+    <div class="system-info-container">
+    
+        <!-- GPU信息 -->
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">GPU 0:</span> <span class="info-value">Intel(R) UHD Graphics 770</span></div>
+            <div class="info-item"><span class="info-label">驱动程序版本:</span> <span class="info-value">32.0.101.6881</span></div>
+            <div class="info-item"><span class="info-label">驱动程序日期:</span> <span class="info-value">2025/6/4</span></div>
+            <div class="info-item"><span class="info-label">DirectX 版本:</span> <span class="info-value">12 (FL 12.1)</span></div>
+        </div>
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">GPU 1:</span> <span class="info-value">NVIDIA GeForce GTX 1660 SUPER</span></div>
+            <div class="info-item"><span class="info-label">驱动程序版本:</span> <span class="info-value">32.0.15.7683</span></div>
+            <div class="info-item"><span class="info-label">驱动程序日期:</span> <span class="info-value">2025/6/17</span></div>
+            <div class="info-item"><span class="info-label">DirectX 版本:</span> <span class="info-value">12 (FL 12.1)</span></div>
+        </div>
+        
+        <!-- CPU信息 -->
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">CPU:</span> <span class="info-value">12th Gen Intel(R) Core(TM) i9-12900</span></div>
+            <div class="info-item"><span class="info-label">基准速度:</span> <span class="info-value">2.40 GHz</span></div>
+            <div class="info-item"><span class="info-label">插槽:</span> <span class="info-value">1</span></div>
+            <div class="info-item"><span class="info-label">内核:</span> <span class="info-value">16</span></div>
+        </div>
+        
+        <div class="info-section">
+            
+            <div class="info-item"><span class="info-label">逻辑处理器:</span> <span class="info-value">24</span></div>
+            <div class="info-item"><span class="info-label">虚拟化:</span> <span class="info-value">已启用</span></div>
+            <div class="info-item"><span class="info-label">磁盘 0 (C:)</span> <span class="info-value">NVMe Micron 2450 NVMe 1024GB</span></div>
+            <div class="info-item"><span class="info-label">容量:</span> <span class="info-value">954 GB</span></div>
+        </div>
+        
+        <!-- 无线网络信息 -->
+        <div class="info-section">
+            <div class="info-item"><span class="info-label">无线适配器:</span> <span class="info-value">Intel(R) Wireless-AC 9462</span></div>
+            <div class="info-item"><span class="info-label">适配器名称:</span> <span class="info-value">WLAN</span></div>
+            <div class="info-item"><span class="info-label">SSID:</span> <span class="info-value">NKU_WLAN</span></div>
+            <div class="info-item"><span class="info-label">连接类型:</span> <span class="info-value">802.11ac</span></div>
+        </div>
+    </div>
+
+    <!-- 左右布局开关 -->
+    <div class="monitor-toggle-container-horizontal">
+         <!-- 右侧开关 -->
+        <label class="monitor-switch">
+            <input type="checkbox" id="toggleRun">
+            <span class="monitor-slider"></span>
+            <span class="monitor-slider-circle"></span>
+        </label>
+
+        <!-- 左侧文字 -->
+        <div class="monitor-toggle-text-horizontal">
+            实时监测
+            <span class="monitor-toggle-subtext-horizontal">监测并判断系统中的恶意进程</span>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- 上方 row：Top 窗口 + 日志窗口 -->
+<div class="row-container">
+    <div class="col-md-6">
+        <div class="window-container">
+            <div class="window-title">进程信息 (Top)</div>
+            <div class="top-window" id="topWindow"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+{#        <div class="window-container">#}
+{#            <div class="window-title"><i class="bi bi-robot"></i>&emsp;日志信息</div>#}
+{#            <div class="log-window" id="logWindow">#}
+{#                <table class="log-table">#}
+{#                    <tbody>#}
+{#                        <!-- 日志内容显示在这里 -->#}
+{#                    </tbody>#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="window-container">
+            <div class="window-title"><i class="bi bi-robot"></i>&emsp;日志信息</div>
+            <div class="log-window" id="logWindow">
+                <div class="recent-alerts">
+                    <ul>
+                        <!-- 日志内容显示在这里 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+<!-- 下方 row：CPU + 内存 -->
+<div class="row-container" style="margin-top: 20px; gap: 20px;">
+    <!-- CPU 利用率折线图，两列排列 -->
+    <div class="col-md-6" style="display:flex; flex-direction:column; gap:5px;">
+        <div class="window-title">CPU 利用率 (8 核)</div>
+        <div style="display:flex; gap:5px; flex:1; height:300px;">
+            <!-- 左列 4 核 -->
+            <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
+                <div class="cpu-window" id="cpu0" style="flex:1;"></div>
+                <div class="cpu-window" id="cpu1" style="flex:1;"></div>
+                <div class="cpu-window" id="cpu2" style="flex:1;"></div>
+                <div class="cpu-window" id="cpu3" style="flex:1;"></div>
+            </div>
+            <!-- 右列 4 核 -->
+            <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
+                <div class="cpu-window" id="cpu4" style="flex:1;"></div>
+                <div class="cpu-window" id="cpu5" style="flex:1;"></div>
+                <div class="cpu-window" id="cpu6" style="flex:1;"></div>
+                <div class="cpu-window" id="cpu7" style="flex:1;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 内存占用折线图 -->
+    <div class="col-md-6">
+        <div class="window-container" style="height:300px;">
+            <div class="window-title">内存占用</div>
+            <div class="mem-window" id="memWindow" style="height:100%;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="space"></div>
+
+<style>
+/* 顶部一行容器 */
+.monitor-top-row {
+    display: flex;
+    align-items: center; /* 高度对齐 */
+    gap: 30px; /* 左右间距 */
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+/* CPU 信息容器，多列 */
+.cpu-info-container {
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(8, auto); /* 三列布局 */
+    gap: 8px 20px; /* 行间距8px，列间距20px */
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: #c5c5c5;
+}
+.system-info-container {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: #c5c5c5;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+.info-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.info-value {
+    flex: 1;
+}
+
+
+
+/* 水平布局容器 */
+.monitor-toggle-container-horizontal {
+    display: flex;
+    align-items: center; /* 垂直居中开关和文字 */
+    gap: 12px; /* 左右间距 */
+    padding-left: 15px; /* 左侧空隙 */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 文字样式 */
+.monitor-toggle-text-horizontal {
+    font-size: 14px;
+    color: #c5c5c5;
+    line-height: 1.2;
+}
+
+.monitor-toggle-subtext-horizontal {
+    display: block;
+    font-size: 12px;
+    color: #a0a0a0;
+}
+
+/* 开关样式 */
+.monitor-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.monitor-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.monitor-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 14px;
+}
+
+.monitor-slider-circle {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 开关选中状态 */
+.monitor-switch input:checked + .monitor-slider {
+    background-color: #8ea9f7; /* Win11 风格绿色 */
+}
+
+.monitor-switch input:checked + .monitor-slider + .monitor-slider-circle {
+    transform: translateX(22px);
+}
+
+.space { width: 100%; margin-top: 50px; margin-bottom: 10px; text-align: center; }
+
+.row-container { display: flex; gap: 10px; align-items: stretch; }
+
+.col-md-6 { flex: 1; }
+
+.window-container { display: flex; flex-direction: column; gap: 5px; }
+
+.window-title {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #6db4b0;
+    background-color: #213d43;
+    padding: 6px 12px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 2px solid #444;
+}
+.top-window {
+    background-color: #410f2f; color: #c5c5c5;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 15px; border: 2px solid #555; border-radius: 0 0 6px 6px;
+    width: 100%; height: 350px; white-space: pre; overflow: auto;
+}
+.log-window {
+    background-color: #262535; color: #dcdcdc;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 15px; border: 2px solid #444; border-radius: 0 0 6px 6px;
+    height: 350px; overflow: hidden;
+}
+.proc-table, .log-table { width: 100%; border-collapse: collapse; }
+.proc-table th, .proc-table td, .log-table td { padding: 4px 14px; text-align: left; }
+.log-new { color: #aaaaaa; }
+.log-kill { color: #d96d69; }
+.cpu-window, .mem-window { background-color: #252535; border-radius: 0 0 6px 6px; border: 2px solid #444; }
+
+/* 开关样式 */
+.switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+  position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+  background-color: white; transition: .4s; border-radius: 50%;
+}
+input:checked + .slider { background-color: #2196F3; }
+input:checked + .slider:before { transform: translateX(26px); }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    let running = false;  // 是否运行刷新
+    const toggle = document.getElementById("toggleRun");
+    toggle.addEventListener("change", (e) => { running = e.target.checked; });
+
+    // ====== Top 窗口 & 日志 ======
+    let prevProcesses = [
+        {pid: 2345, user: "root", cmd: "Xorg"},
+        {pid: 2891, user: "chenxi", cmd: "gnome-shell"},
+        {pid: 3124, user: "chenxi", cmd: "gedit"},
+        {pid: 4012, user: "mysql", cmd: "mysqld"},
+        {pid: 5120, user: "www-data", cmd: "apache2"},
+        {pid: 6789, user: "chenxi", cmd: "top"},
+    ];
+
+    function generateTopOutput() {
+        let processes = [...prevProcesses];
+        if (processes.length < 10 && Math.random() < 0.4) {
+            const newPid = Math.floor(6000 + Math.random() * 2000);
+            const newProc = {pid: newPid, user: "chenxi", cmd: "python3"};
+            processes.push(newProc);
+            addLog(`新进程生成: PID=${newPid}, CMD=${newProc.cmd}`, "new");
+        }
+        if (processes.length > 5 && Math.random() < 0.3) {
+            const idx = Math.floor(Math.random() * processes.length);
+            const deadProc = processes.splice(idx, 1)[0];
+            addLog(`PID=${deadProc.pid}, CMD=${deadProc.cmd}，被Agent判定为恶意进程，kill`, "kill");
+        }
+        prevProcesses = processes;
+
+        let procStr = `<table class="proc-table">
+            <thead>
+                <tr>
+                    <th>PID</th><th>USER</th><th>PR</th><th>NI</th>
+                    <th>VIRT</th><th>RES</th><th>SHR</th><th>S</th>
+                    <th>%CPU</th><th>%MEM</th><th>TIME+</th><th>COMMAND</th>
+                </tr>
+            </thead>
+            <tbody>`;
+        processes.forEach(p => {
+            const cpu = (Math.random() * 10).toFixed(1);
+            const mem = (Math.random() * 2).toFixed(1);
+            const time = `${Math.floor(Math.random()*10)}:${(Math.random()*59).toFixed(2)}`;
+            procStr += `<tr>
+                <td>${p.pid}</td><td>${p.user}</td><td>20</td><td>0</td>
+                <td>165432</td><td>34128</td><td>18024</td><td>S</td>
+                <td>${cpu}</td><td>${mem}</td><td>${time}</td><td>${p.cmd}</td>
+            </tr>`;
+        });
+        procStr += `</tbody></table>`;
+        return procStr;
+    }
+
+    function refreshTop() { if(running) document.getElementById("topWindow").innerHTML = generateTopOutput(); }
+    function addLog(msg, type) {
+        const logList = document.querySelector("#logWindow .recent-alerts ul");
+        if (!logList) return;
+        const timeStr = new Date().toLocaleTimeString();
+        const colorClass = type === "new" ? "log-new" : type === "kill" ? "log-kill" : "";
+        const newItem = document.createElement("li");
+        newItem.innerHTML = `<span>[${timeStr}] ${msg}</span>`;
+        newItem.className = colorClass;
+        logList.prepend(newItem);
+        while (logList.children.length > 20) logList.removeChild(logList.lastChild);
+    }
+
+    // ====== CPU & 内存折线图 ======
+    const cpuCharts = [];
+    const cpuDataArr = [];
+    const cpuIds = ['cpu0','cpu1','cpu2','cpu3','cpu4','cpu5','cpu6','cpu7'];
+    const timeWindow = 30;
+    let labels = Array(timeWindow).fill('').map((_, i) => i - timeWindow + 1);
+
+    cpuIds.forEach((id, idx) => {
+        cpuCharts[idx] = echarts.init(document.getElementById(id));
+        cpuDataArr[idx] = Array(timeWindow).fill(0);
+
+        const option = {
+            title: {
+                text: `CPU${idx+1}`,
+                left: 'left',
+                top: 'top',
+                textStyle: { color: '#c3ecfa', fontSize: 12, fontWeight: 'bold' }
+            },
+            xAxis: { type: 'category', data: labels, boundaryGap: false, show: false },
+            yAxis: { type: 'value', max: 100, show: false },
+            series: [{
+                data: cpuDataArr[idx],
+                type: 'line',
+                smooth: true,
+                areaStyle: { color: 'rgba(195, 236, 250, 0.3)' },
+                lineStyle: { color: '#c3ecfa', width: 2 },
+            }],
+            grid: { left: '3%', right: '3%', top: '20%', bottom: '10%' }
+        };
+        cpuCharts[idx].setOption(option);
+    });
+
+    const memChart = echarts.init(document.getElementById('memWindow'));
+    let memData = Array(timeWindow).fill(0);
+    const memOption = {
+        xAxis: { type: 'category', data: labels, boundaryGap: false, show: false },
+        yAxis: { type: 'value', max: 100 },
+        series: [{
+            data: memData,
+            type: 'line',
+            smooth: true,
+            areaStyle: { color: 'rgba(193, 149, 243, 0.3)' },
+            lineStyle: { color: '#c195f3', width: 2 },
+        }],
+        grid: { left: '3%', right: '3%', top: '10%', bottom: '10%' }
+    };
+    memChart.setOption(memOption);
+
+    function refreshCharts() {
+        if(!running) return;
+
+        // CPU 图表（保持原逻辑）
+        cpuCharts.forEach((chart, idx) => {
+            const newVal = (Math.random()*60).toFixed(1);
+            cpuDataArr[idx].push(newVal);
+            cpuDataArr[idx].shift();
+            chart.setOption({ series: [{ data: cpuDataArr[idx] }] });
+        });
+
+        // 内存曲线优化
+        const lastMem = parseFloat(memData[memData.length - 1]); // 上一次值
+        // 模拟小幅度波动，-1~1% 或者 -2~2%
+        const delta = (Math.random() * 2 - 1);
+        let newMem = lastMem + delta;
+
+        // 保持在合理范围 20~80%（可根据实际内存调整）
+        if(newMem < 20) newMem = 20 + Math.random();
+        if(newMem > 80) newMem = 80 - Math.random();
+
+        newMem = newMem.toFixed(1);
+        memData.push(newMem);
+        memData.shift();
+        memChart.setOption({ series: [{ data: memData }] });
+    }
+
+
+    setInterval(refreshTop, 1000);
+    setInterval(refreshCharts, 1000);
+});
+</script>
+
+{% endblock %}
