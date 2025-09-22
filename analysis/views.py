@@ -11,14 +11,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 @require_safe
 def index(request):
-    # 手动设置 analysis.info.score
-    context = {
-        'analysis': {
-            'info': {
-                'score': 4.2  # 手动赋值，例如 4.2
-            }
-        }
-    }
     return render(request, "analysis/index.html", {})
 
 @require_safe

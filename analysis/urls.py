@@ -15,9 +15,10 @@ from .views import chat_view, get_response
 urlpatterns = [
     path("", views.index, name='analysis.views.index'),  # 首页
     path("search/", views.search, name='analysis.views.search'),  # 搜索
+    path("<int:task_id>/", views.report, name='analysis.views.report'),  # 任务报告
 ]
 
-# path("<int:task_id>/", views.report, name='analysis.views.report'),  # 任务报告
+#
 # path("latest/", views.latest_report, name='analysis.views.latest_report'),  # 最新报告
 # path("remove/<int:task_id>/", views.remove, name='analysis.views.remove'),  # 移除任务
 # path("chunk/<int:task_id>/<int:pid>/<int:pagenum>/", views.chunk, name='analysis.views.chunk'),  # 数据块
