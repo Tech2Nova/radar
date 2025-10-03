@@ -4,30 +4,23 @@
 <div class="loader" style="color: white;">
     <div class="bean"></div>
     <div class="text" style="color: white!important;">正在分析...</div>
-    <p>任务 ID: <span id="task-id">{{ task_id }}</span></p>
+    <p>任务 ID: {{ task_id }}</p>
     <p>当前状态: <span id="status">{{ status }}</span></p>
 </div>
 
 <script>
     function checkStatus(taskId) {
-        fetch(`/submission/status/${taskId}/`, { // 修正 URL 路径
+        fetch(`/status/${taskId}/`, {
             headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value // 确保 CSRF 令牌正确
+                'X-CSRFToken': '{{ csrf_token }}'
             }
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP 错误: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.error) {
                 alert(data.error);
             } else if (data.status === 'reported') {
-                console.log('跳转到:', data.redirect);
-                window.location.href = data.redirect; // 使用后端返回的 redirect 字段
+                window.location.href = data.redirect;
             } else {
                 document.getElementById('status').innerText = data.status;
                 setTimeout(() => checkStatus(taskId), 2000);
@@ -39,14 +32,6 @@
         });
     }
 
-    // 从 URL 查询参数获取 task_id
-    const urlParams = new URLSearchParams(window.location.search);
-    const taskId = urlParams.get('task_id');
-    if (taskId) {
-        document.getElementById('task-id').innerText = taskId;
-        window.onload = () => checkStatus(taskId);
-    } else {
-        alert('错误：未提供任务 ID');
-    }
+    window.onload = () => checkStatus('{{ task_id }}');
 </script>
 {% endblock %}
