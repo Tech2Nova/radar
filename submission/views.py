@@ -94,6 +94,18 @@ def complete(request):
     except Task.DoesNotExist:
         return render(request, "error.html", {"error": "指定的任务不存在"})
 
+def status_page(request):
+    task_id = request.GET.get('task_id')
+    if not task_id:
+        return render(request, "error.html", {"error": "缺少任务 ID"})
+    try:
+        task = Task.objects.get(task_id=task_id)
+        return render(request, "submission/status.html", {
+            "task_id": task_id,
+            "status": task.status,
+        })
+    except Task.DoesNotExist:
+        return render(request, "error.html", {"error": "指定的任务不存在"})
 
 def status(request, task_id):
     try:

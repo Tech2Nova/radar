@@ -72,33 +72,6 @@
         document.querySelector('input[name="category"]').value = 'file';
     }
 
-    // 轮询任务状态
-    function pollStatus(taskId) {
-        fetch(`/submission/status/${taskId}/`, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP 错误: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('状态响应:', data); // 调试日志
-            if (data.status === 'reported') {
-                window.location.href = data.redirect; // 使用后端返回的 redirect 字段
-            } else {
-                setTimeout(() => pollStatus(taskId), 1000); // 每秒轮询
-            }
-        })
-        .catch(error => {
-            console.error('轮询错误:', error);
-            alert('检查任务状态失败，请稍后重试');
-        });
-    }
     // 提交表单（使用 AJAX）
     document.querySelector('#upload-form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -135,8 +108,9 @@
             if (data.error) {
                 alert('提交失败：' + data.error);
             } else if (data.task_id) {
-                console.log('任务提交成功，task_id:', data.task_id); // 调试日志
-                pollStatus(data.task_id); // 开始轮询状态
+                console.log('任务提交成功，task_id:', data.task_id);
+                // 跳转到 status.html，传递 task_id
+                window.location.href = `/submission/status.html?task_id=${data.task_id}`;
             } else {
                 alert('提交失败：未收到 task_id');
             }
