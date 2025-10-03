@@ -1,4 +1,3 @@
-# celery -A radar worker -l info
 import os
 from celery import Celery
 
