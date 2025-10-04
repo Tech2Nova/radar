@@ -14,6 +14,14 @@ def index(request):
     return render(request, "analysis/index.html", {})
 
 @require_safe
+def benign(request):
+    return render(request, "analysis/benign.html", {})
+
+@require_safe
+def malware(request):
+    return render(request, "analysis/malware.html", {})
+
+@require_safe
 def pending(request):
     return render(request, "analysis/pending.html", {})
 

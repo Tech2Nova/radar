@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <!-- 分数区域 -->
+        <div class="col-md-3">
+            <div class="card" style="height: 300px !important;">
+                <div class="alert alert-danger text-center">
+                    <h4><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> 评分</h4>
+                    <canvas id="danger-circle" width="150" height="150"></canvas>
+                    <p>检测到 <b>高度投毒风险</b>，置信度为 <strong><span id="score">70.9</span>%!</strong></p>
+                    <p>
+                        <b>请注意</b>: 评分系统仍处于研发阶段，应视为<b><i>测试</i></b>指标。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- 文件/URL 概览区域 -->
+        <div class="col-md-7">
+            <div class="card" style="height: 300px !important;">
+                <div class="card-header">
+                    <h4 style="color: white!important; padding-left: 10px"> 攻击概览</h4>
+                </div>
+                <div class="card-body">
+                    <div class="file-info">
+                        <ul>
+                            <li><strong>攻击类型:</strong> 投毒攻击</li>
+                            <li><strong>投毒类型:</strong> Bullseye Polytope</li>
+                            <li><strong>攻击注入时间:</strong> 2025.09.21-19:26:30</li>
+                            <li><strong>文件大小:</strong> 245.7 KB</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 样本信息 -->
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <div class="card" style="background-color: #171625;height: 450px !important;">
+                <div class="card-header">
+                    <h4 style="color: white!important; padding-left: 10px"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 检测分析</h4>
+                </div>
+                <div class="card-body">
+                    <div class="file-info">
+                        <ul>
+                            <li><strong>神经元激活洞察：</strong> 正常输入激活294号神经元，投毒输入激活397号，可能导致额外计算负载</li>
+                            <li><strong>可解释性分析:</strong> GPU HPC显示内存带宽增加20%，符合专利研究中Bullseye Polytope攻击的缓存复用模式</li>
+                            <li><strong>缓解建议：</strong> 使用Nsight收集GPU HPC、应用ML分类器如J48移除异常、采用HAISec框架重训模型，减少对干净数据的依赖</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card" style="background-color: #171625; height: 450px !important;">
+                <div class="card-header" style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.25rem;">
+                    <h4 style="color: white!important; margin: 0;">训练过程中GPU HPC计数值</h4>
+                    <div id="gpu-hpc-legend" style="color: white; font-size: 12px; display: flex; align-items: center; gap: 10px;"></div>
+                </div>
+                <div class="card-body">
+                    <canvas id="gpu-hpc-chart" style="max-height: 400px; width: 100%; height: 400px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+function drawProgress(canvasId, radius, startColor, endColor, score) {
+  var canvas = document.getElementById(canvasId);
+  var ctx = canvas.getContext("2d");
+
+  var x = canvas.width / 2;
+  var y = canvas.height / 2;
+  var startAngle = -Math.PI / 2;
+  var endAngle = Math.PI * 1.5;
+  var counterClockwise = false;
+
+  ctx.beginPath();
+  ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = 'lightgrey';
+  ctx.stroke();
+
+  var normalizedScore = score / 100;
+  var progressAngle = normalizedScore * Math.PI * 1.5;
+
+  ctx.beginPath();
+  ctx.arc(x, y, radius, startAngle, startAngle + progressAngle, counterClockwise);
+  ctx.lineWidth = 10;
+  var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  gradient.addColorStop(0, startColor);
+  gradient.addColorStop(1, endColor);
+  ctx.strokeStyle = gradient;
+  ctx.stroke();
+
+  if (score !== 0) {
+    ctx.fillStyle = "white";
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(score + "%", x, y);
+  } else {
+    ctx.fillStyle = "white";
+    ctx.font = "bold 40px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("✓", x, y);
+  }
+}
+
+var score = parseFloat(document.getElementById("score").innerText);
+drawProgress("danger-circle", 50, '#f2dede', 'red', score);
+
+document.addEventListener('DOMContentLoaded', function() {
+    var canvas = document.getElementById('gpu-hpc-chart');
+    if (!canvas) {
+        console.error('Canvas element with ID "gpu-hpc-chart" not found');
+        return;
+    }
+    var ctx = canvas.getContext('2d');
+    var gpuHpcChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                'PCIe Write BAR0',
+                'PCIe Read BAR0',
+                'PCIe Write BW',
+                'PCIe Read BW',
+                'L1 Shared Throughput',
+                'L1 Surface Throughput',
+                'L1 Hit Rate',
+                'L2 Bandwidth'
+            ],
+            datasets: [
+                {
+                    label: '正常基准数据',
+                    data: [0.8, 0.82, 0.83, 0.81, 0.85, 0.84, 0.86, 0.87],
+                    backgroundColor: '#5faa98',
+                    borderColor: '#5faa98',
+                    barThickness: 20,
+                    maxBarThickness: 30
+                },
+                {
+                    label: '实际采集数据',
+                    data: [0.91, 0.93, 0.95, 0.92, 0.97, 0.94, 0.96, 0.98],
+                    backgroundColor: '#f56154',
+                    borderColor: '#f56154',
+                    barThickness: 20,
+                    maxBarThickness: 30
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: false
+                },
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 45,
+                        minRotation: 45,
+                        font: { size: 10 },
+                        color: '#ffffff' // 设置 x 轴标签文字颜色为白色
+                    },
+                    barPercentage: 0.4,
+                    categoryPercentage: 0.5
+                },
+                y: {
+                    min: 0,
+                    max: 1
+                }
+            }
+        }
+    });
+
+    // 动态生成图例
+    const legendContainer = document.getElementById('gpu-hpc-legend');
+    const legendItems = gpuHpcChart.data.datasets.map(dataset => `
+        <span style="display: inline-flex; align-items: center;">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: ${dataset.backgroundColor}; margin-right: 5px;"></span>
+            ${dataset.label}
+        </span>
+    `).join('');
+    legendContainer.innerHTML = legendItems;
+});
+
+function downloadReport() {
+    window.alert('报告下载功能即将上线');
+}
+</script>
+{% endblock %}
