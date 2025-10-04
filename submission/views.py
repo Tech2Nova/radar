@@ -104,10 +104,15 @@ def status(request, task_id):
             request, "error.html", {"error": "指定的任务似乎不存在。"}
         )
 
-    if task.status == "reported":
-        redirect_url = reverse('analysis.views.index')  # 使用 reverse 动态解析 URL
+    if task.status == "completed":
+        if task.result == 0:
+            redirect_url = reverse('analysis.views.benign')  # 假设 benign 视图的 URL name
+        elif task.result == 1:
+            redirect_url = reverse('analysis.views.malware')  # 假设 malware 视图的 URL name
+        else:
+            redirect_url = reverse('analysis.views.index')  # 回退
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-        return JsonResponse({"status": "reported", "redirect": redirect_url}) if is_ajax else redirect(redirect_url)
+        return JsonResponse({"status": "completed", "redirect": redirect_url}) if is_ajax else redirect(redirect_url)
 
     is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
     return JsonResponse({"status": task.status, "task_id": str(task_id)}) if is_ajax else render(

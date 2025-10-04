@@ -88,7 +88,7 @@
         })
         .then(data => {
             console.log('状态响应:', data); // 调试日志
-            if (data.status === 'reported') {
+            if (data.status === 'completed') {
                 window.location.href = data.redirect; // 使用后端返回的 redirect 字段
             } else {
                 setTimeout(() => pollStatus(taskId), 1000); // 每秒轮询
