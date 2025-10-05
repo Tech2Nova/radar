@@ -16,8 +16,10 @@ urlpatterns = [
     path("", views.index, name='analysis.views.index'),  # 首页
     path("search/", views.search, name='analysis.views.search'),  # 搜索
 
-    path("benign/", views.benign, name='analysis.views.benign'),  # 任务报告
-    path("malware/", views.malware, name='analysis.views.malware'),  # 任务报告
+    # path("benign/", views.benign, name='analysis.views.benign'),  # 任务报告
+    # path("malware/", views.malware, name='analysis.views.malware'),  # 任务报告
+    path('benign/<str:task_id>/', views.benign, name='analysis.views.benign'),
+    path('malware/<str:task_id>/', views.malware, name='analysis.views.malware'),
 ]
 
 # path("<int:task_id>/", views.report, name='analysis.views.report'),  # 任务报告

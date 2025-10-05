@@ -13,13 +13,31 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     return render(request, "analysis/index.html", {})
 
-@require_safe
-def benign(request):
-    return render(request, "analysis/benign.html", {})
+# analysis/views.py
+from django.shortcuts import render, get_object_or_404
+from submission.models import Task  # 导入 Task 模型
 
-@require_safe
-def malware(request):
-    return render(request, "analysis/malware.html", {})
+def benign(request, task_id):
+    """正常（benign）分析页面"""
+    task = get_object_or_404(Task, task_id=task_id)  # 查询 Task，如果不存在返回 404
+    context = {
+        'task_id': task_id,
+        'confidence': task.confidence,  # 直接传递 confidence（浮点数，0-1 之间）
+        'result': '正常',  # 可选：页面标题
+        # ... 其他上下文数据 ...
+    }
+    return render(request, 'analysis/benign.html', context)
+
+def malware(request, task_id):
+    """异常（malware）分析页面"""
+    task = get_object_or_404(Task, task_id=task_id)
+    context = {
+        'task_id': task_id,
+        'confidence': task.confidence,  # 传递 confidence
+        'result': '异常',  # 可选：页面标题
+        # ... 其他上下文数据 ...
+    }
+    return render(request, 'analysis/malware.html', context)
 
 @require_safe
 def pending(request):

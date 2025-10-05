@@ -106,13 +106,17 @@ def status(request, task_id):
 
     if task.status == "completed":
         if task.result == 0:
-            redirect_url = reverse('analysis.views.benign')  # 假设 benign 视图的 URL name
+            redirect_url = reverse('analysis.views.benign', args=[task_id])  # 传递 task_id
         elif task.result == 1:
-            redirect_url = reverse('analysis.views.malware')  # 假设 malware 视图的 URL name
+            redirect_url = reverse('analysis.views.malware', args=[task_id])  # 传递 task_id
         else:
-            redirect_url = reverse('analysis.views.index')  # 回退
+            redirect_url = reverse('analysis.views.index')
+
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-        return JsonResponse({"status": "completed", "redirect": redirect_url}) if is_ajax else redirect(redirect_url)
+        if is_ajax:
+            return JsonResponse({"status": "completed", "redirect": redirect_url})
+        else:
+            return redirect(redirect_url)  # 现在 redirect_url 已包含 task_id
 
     is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
     return JsonResponse({"status": task.status, "task_id": str(task_id)}) if is_ajax else render(
