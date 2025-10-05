@@ -6083,13 +6083,6 @@ a.thumbnail:hover {
     /*border-color: #ebccd1*/
 }
 
-.alert-safe {
-    color: #5faa98;
-    /*background-color: #f2dede;*/
-    background-color: #252c42;
-    /*border-color: #ebccd1*/
-}
-
 .alert-danger hr {
     border-top-color: #e4b9c0
 }

@@ -61,7 +61,7 @@
 <div class="row-container">
     <!-- 左边：PCIe & 其他指标折线图 -->
     <div class="col-md-6" style="display:flex; flex-direction:column; gap:5px;">
-        <div class="window-title">GPU HPC计数值</div>
+        <div class="window-title">CPU HPC计数值</div>
         <div style="display:flex; gap:5px; flex:1; height:350px;">
             <!-- 左列 4 指标 -->
             <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
@@ -297,9 +297,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function refreshLogs() {
         if (!running) return;
         if (Math.random() < 0.7) {
-            addLog(`模型训练正常，无异常检测到。`, "normal");
+            addLog(`系统运行正常，未检测到异常行为。`, "normal");
         } else {
-            addLog(`检测到投毒/后门攻击！模型可能被入侵。`, "poison");
+            addLog(`检测到异常行为！系统可能正在遭受攻击。`, "poison");
         }
     }
 
