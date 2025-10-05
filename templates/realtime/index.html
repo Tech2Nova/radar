@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
 <!-- 页面上方开关 + 系统信息容器 -->
 <div class="monitor-top-row">
     <!-- 左侧：硬件性能信息 -->
@@ -40,7 +39,6 @@
             <div class="info-item"><span class="info-label">连接类型:</span> <span class="info-value">802.11ac</span></div>
         </div>
     </div>
-
     <!-- 右侧开关 -->
     <div class="monitor-toggle-container-horizontal">
         <label class="monitor-switch">
@@ -54,9 +52,9 @@
         </div>
     </div>
 </div>
-    
+   
 <div class="dashed-line"></div>
-    
+   
 <!-- 单行布局：左边折线图，右边日志信息 -->
 <div class="row-container">
     <!-- 左边：PCIe & 其他指标折线图 -->
@@ -65,21 +63,20 @@
         <div style="display:flex; gap:5px; flex:1; height:350px;">
             <!-- 左列 4 指标 -->
             <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
-                <div class="cpu-window" id="pcie-write-bar0" style="flex:1;"></div>
-                <div class="cpu-window" id="pcie-read-bar0" style="flex:1;"></div>
-                <div class="cpu-window" id="pcie-write-bw" style="flex:1;"></div>
-                <div class="cpu-window" id="pcie-read-bw" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc1" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc2" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc3" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc4" style="flex:1;"></div>
             </div>
             <!-- 右列 4 指标 -->
             <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
-                <div class="cpu-window" id="l1-shared-throughput" style="flex:1;"></div>
-                <div class="cpu-window" id="l1-surface-throughput" style="flex:1;"></div>
-                <div class="cpu-window" id="l1-hit-rate" style="flex:1;"></div>
-                <div class="cpu-window" id="l2-bandwidth" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc5" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc6" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc7" style="flex:1;"></div>
+                <div class="cpu-window" id="hpc8" style="flex:1;"></div>
             </div>
         </div>
     </div>
-
     <!-- 右边：日志信息 -->
     <div class="col-md-6">
         <div class="window-container">
@@ -94,9 +91,7 @@
         </div>
     </div>
 </div>
-
 <div class="space"></div>
-
 <style>
 /* 顶部一行容器 */
 .monitor-top-row {
@@ -106,7 +101,6 @@
     margin-bottom: 30px;
     margin-top: 20px;
 }
-
 /* 系统信息容器 */
 .system-info-container {
     margin-left: 20px;
@@ -117,27 +111,22 @@
     font-size: 13px;
     color: #c5c5c5;
 }
-
 .info-section {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-
 .info-item {
     display: flex;
     align-items: center;
 }
-
 .info-label {
     font-weight: bold;
     margin-right: 10px;
 }
-
 .info-value {
     flex: 1;
 }
-
 /* 水平布局容器 */
 .monitor-toggle-container-horizontal {
     display: flex;
@@ -146,20 +135,17 @@
     padding-left: 15px;
     font-family: 'Segoe UI', sans-serif;
 }
-
 /* 文字样式 */
 .monitor-toggle-text-horizontal {
     font-size: 14px;
     color: #c5c5c5;
     line-height: 1.2;
 }
-
 .monitor-toggle-subtext-horizontal {
     display: block;
     font-size: 12px;
     color: #a0a0a0;
 }
-
 /* 开关样式 */
 .monitor-switch {
     position: relative;
@@ -169,13 +155,11 @@
     margin-top: 5px;
     margin-left: 20px;
 }
-
 .monitor-switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
 .monitor-slider {
     position: absolute;
     cursor: pointer;
@@ -187,7 +171,6 @@
     transition: 0.4s;
     border-radius: 14px;
 }
-
 .monitor-slider-circle {
     position: absolute;
     height: 22px;
@@ -199,16 +182,13 @@
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-
 /* 开关选中状态 */
 .monitor-switch input:checked + .monitor-slider {
     background-color: #8ea9f7;
 }
-
 .monitor-switch input:checked + .monitor-slider + .monitor-slider-circle {
     transform: translateX(22px);
 }
-
 /* 单行容器 */
 .row-container {
     display: flex;
@@ -216,17 +196,14 @@
     align-items: stretch;
     margin: 20px;
 }
-
 .col-md-6 {
     flex: 1;
 }
-
 .window-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-
 .window-title {
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 600;
@@ -237,7 +214,6 @@
     border-radius: 4px 4px 0 0;
     border-bottom: 2px solid #444;
 }
-
 .log-window {
     color: #dcdcdc;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -246,25 +222,21 @@
     height: 350px;
     overflow: hidden;
 }
-
 .cpu-window {
     background-color: #252535;
     border-radius: 0 0 6px 6px;
     border: 2px solid #444;
 }
-
 .log-normal {
     color: #5faa98;
     border-left: 2px solid green;
     padding-left: 8px;
 }
-
 .log-poison {
     color: #f56154;
     border-left: 2px solid red;
     padding-left: 8px;
 }
-
 .space {
     width: 100%;
     margin-top: 50px;
@@ -272,15 +244,12 @@
     text-align: center;
 }
 </style>
-
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     let running = false;
     const toggle = document.getElementById("toggleRun");
     toggle.addEventListener("change", (e) => { running = e.target.checked; });
-
     // ====== 日志窗口 ======
     function addLog(msg, type) {
         const logList = document.querySelector("#logWindow .recent-alerts ul");
@@ -293,7 +262,6 @@ document.addEventListener("DOMContentLoaded", () => {
         logList.prepend(newItem);
         while (logList.children.length > 20) logList.removeChild(logList.lastChild);
     }
-
     function refreshLogs() {
         if (!running) return;
         if (Math.random() < 0.7) {
@@ -302,37 +270,34 @@ document.addEventListener("DOMContentLoaded", () => {
             addLog(`检测到异常行为！系统可能正在遭受攻击。`, "poison");
         }
     }
-
     // ====== PCIe & 其他指标折线图 ======
     const cpuCharts = [];
     const cpuDataArr = [];
     const cpuIds = [
-        'pcie-write-bar0',
-        'pcie-read-bar0',
-        'pcie-write-bw',
-        'pcie-read-bw',
-        'l1-shared-throughput',
-        'l1-surface-throughput',
-        'l1-hit-rate',
-        'l2-bandwidth'
+        'hpc1',
+        'hpc2',
+        'hpc3',
+        'hpc4',
+        'hpc5',
+        'hpc6',
+        'hpc7',
+        'hpc8'
     ];
     const chartTitles = [
-        'PCIe Write BAR0',
-        'PCIe Read BAR0',
-        'PCIe Write BW',
-        'PCIe Read BW',
-        'L1 Shared Throughput',
-        'L1 Surface Throughput',
-        'L1 Hit Rate',
-        'L2 Bandwidth'
+        'LLC-stores',
+        'LLC-load-misses',
+        'bus-cycles',
+        'branches',
+        'LLC-store-misses',
+        'cache-misses',
+        'cache-references',
+        'dTLB-load-misses'
     ];
     const timeWindow = 30;
     let labels = Array(timeWindow).fill('').map((_, i) => i - timeWindow + 1);
-
     cpuIds.forEach((id, idx) => {
         cpuCharts[idx] = echarts.init(document.getElementById(id));
         cpuDataArr[idx] = Array(timeWindow).fill(0);
-
         const option = {
             title: {
                 text: chartTitles[idx],
@@ -353,7 +318,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         cpuCharts[idx].setOption(option);
     });
-
     function refreshCharts() {
         if (!running) return;
         cpuCharts.forEach((chart, idx) => {
@@ -363,10 +327,8 @@ document.addEventListener("DOMContentLoaded", () => {
             chart.setOption({ series: [{ data: cpuDataArr[idx] }] });
         });
     }
-
     setInterval(refreshLogs, 1000);
     setInterval(refreshCharts, 1000);
 });
 </script>
-
 {% endblock %}
