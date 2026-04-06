@@ -4,9 +4,8 @@
 # 查看文件 "docs/LICENSE" 以获取复制权限。
 
 from . import views
-from django.urls import path
+from django.urls import path  # 更新为Django 5.0.8的导入方式
 
 urlpatterns = [
-    path("", views.index, name="realtime.views.index"),
-    path("cpu/", views.cpu_usage, name="cpu_usage"),   # 新增
+    path("", views.index, name='today.views.index'),
 ]

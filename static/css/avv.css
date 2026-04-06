@@ -16,7 +16,7 @@
 }
 .header-logo img {
     width: 60px;
-    height: 60px;
+    height: 70px;
     object-fit: contain;
 }
 
@@ -99,27 +99,42 @@
     padding: 20px;
 }
 
+
 .logo-smarthawk img {
     width: 140px;
     height: 100px;
     object-fit: contain;
 }
+/*.logo-smarthawk {*/
+/*    width: 800px;*/
+/*    display: flex;*/
+/*    height: 250px;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    margin: 0 auto;*/
+/*    color: #8ea9f7 !important;*/
+/*}*/
+
 .logo-smarthawk {
     width: 800px;
     display: flex;
     height: 250px;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    color: #7761f0 !important;
+    margin: 0 auto 0 0;        /* 先完全靠左 */
+    margin-left: -55px;         /* 再根据需要向右推一点，你可以调整这个值 */
+    /* 或者直接写：margin: 0 0 0 80px; */
+    color: #1d2433 !important;
 }
+
+
 .logo-description p {
     font-size: 1.25rem;
-    padding: 1rem 8rem;
+    padding: 1rem 5rem;
     line-height: 1.6;
     letter-spacing: 1px;
     margin: 0;
-    color: #fff !important;
+    color: #0c0c0c !important;
 }
 .logo-smarthawk span {
     font-size: 7rem;
@@ -219,7 +234,7 @@
     text-align: center;
     font-size: 12px;
     padding: 2rem 15rem;
-    color: #aaa;
+    color: #808080;
 }
 .resubmit {
     width: 8rem;
@@ -871,7 +886,7 @@ input[type='checkbox']:checked::before {
 
 :root {
     --primary-color: #6366f1;
-    --gradient-bg: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --gradient-bg: linear-gradient(135deg, #6366f1 0%, #8ea9f7 100%);
     --hover-effect: brightness(0.95);
 }
 

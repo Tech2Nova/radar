@@ -6,10 +6,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
     /* 深色背景 */
-    background-color: #171625;
-    color: #ccc;
-    /* margin-top: 60px; */
-    /*background: #ffffff url('/static/graphic/background.png') repeat-x;*/
+    background:
+        radial-gradient(circle at top left, rgba(108, 124, 255, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(28, 154, 214, 0.08), transparent 24%),
+        linear-gradient(180deg, #eef2f8 0%, #e8edf5 100%);
+    color: #1d2433;
 }
 
 main{
@@ -52,7 +53,10 @@ footer a:hover {
 }
 
 #footer-extra {
-    background: #171625;
+    background:
+        radial-gradient(circle at top left, rgba(108, 124, 255, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(28, 154, 214, 0.08), transparent 24%),
+        linear-gradient(180deg, #eef2f8 0%, #e8edf5 100%);
     font-size: 11px;
     color: #999;
     margin: 0 auto;
@@ -269,7 +273,7 @@ html::-webkit-scrollbar {
 }
 
 .recent-alerts li {
-    background-color: #1d2231;
+    background-color: #262535;
     padding: 10px 10px;
     /*border-left: 2px solid #f95959;*/
     margin-bottom: 5px;

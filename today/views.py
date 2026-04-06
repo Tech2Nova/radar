@@ -4,29 +4,19 @@
 # See the file 'docs/LICENSE' for copying permission.
 
 import sys
-import psutil
+import time
 
 from django.conf import settings
 from django.shortcuts import render
-from django.http import JsonResponse
 from django.views.decorators.http import require_safe
 
 # 将CUCKOO_PATH添加到系统路径
 sys.path.append(settings.CUCKOO_PATH)
 
 
+
 @require_safe
 def index(request):
+
     # 渲染模板并返回报告
-    return render(request, "realtime/index_260326 copy.html")
-
-
-@require_safe
-def cpu_usage(request):
-    cpu = psutil.cpu_percent(interval=None)
-    mem = psutil.virtual_memory().percent
-
-    return JsonResponse({
-        "cpu": float(cpu),
-        "mem": float(mem)
-    })
+    return render(request, "today/index.html")

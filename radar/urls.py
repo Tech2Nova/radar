@@ -31,6 +31,7 @@ urlpatterns = [
     path("submission/", include("submission.urls")),  # 包含提交模块的URL
     path("analysis/", include("analysis.urls")),
     path("realtime/", include("realtime.urls")),  # 包含实时检测模块的URL
+    path("today/", include("today.urls")),  # 包含今日统计模块的URL
     path("dashboard/", include("dashboard.urls")),  # 包含仪表板模块的URL
 
 ]
