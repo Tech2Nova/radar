@@ -1,0 +1,553 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(108, 124, 255, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(28, 154, 214, 0.08), transparent 24%),
+        linear-gradient(180deg, #eef2f8 0%, #e8edf5 100%);
+    color: #1d2433;
+}
+
+/* 页面整体只占中间一块区域，不铺满 */
+.page {
+    width: min(760px, 92vw);
+    margin: 34px auto;
+    padding: 18px 0 8px;
+}
+
+/* 统一窗口样式 */
+.window-container {
+    margin: 0 0 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(198, 210, 228, 0.9);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(31, 45, 79, 0.08),
+        0 2px 8px rgba(31, 45, 79, 0.04);
+    backdrop-filter: blur(8px);
+}
+
+.window-title {
+    background: linear-gradient(90deg, #1f2d4b, #2f4777);
+    color: #fff;
+    font-size: 18px;
+    padding: 14px 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
+
+.window-content {
+    padding: 18px;
+}
+
+/* 顶部总览卡片 */
+.summary-card {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1fr;
+    gap: 14px;
+    align-items: stretch;
+    transition: all 0.25s ease;
+}
+
+.summary-card.clickable {
+    cursor: pointer;
+}
+
+.summary-card.clickable:hover {
+    transform: translateY(-2px);
+}
+
+/* 左侧主信息 */
+.summary-main {
+    background: linear-gradient(135deg, #f7faff, #eef4ff);
+    border: 1px solid #dbe6fb;
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summary-date {
+    font-size: 14px;
+    color: #607089;
+    margin-bottom: 8px;
+}
+
+.summary-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d2d4f;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.summary-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5e6f87;
+}
+
+/* 右侧两个统计块 */
+.stat-box {
+    border-radius: 16px;
+    padding: 16px 14px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.stat-box.blue {
+    background: linear-gradient(135deg, #edf4ff, #e6f0ff);
+    border: 1px solid #d6e3fb;
+}
+
+.stat-box.green {
+    background: linear-gradient(135deg, #eefcf3, #e6f8ec);
+    border: 1px solid #d4ecd8;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #667790;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    color: #1e2b45;
+}
+
+.stat-note {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #607089;
+}
+
+/* 日志区域 */
+.middle-log-box {
+    background: linear-gradient(180deg, #111b34 0%, #0d162b 100%);
+    border: 1px solid #24355f;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(8, 14, 30, 0.18);
+}
+
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.log-header-title {
+    color: #dfe8ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.log-status {
+    font-size: 12px;
+    color: #ffd7cf;
+    background: rgba(232, 111, 76, 0.14);
+    border: 1px solid rgba(232, 111, 76, 0.3);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.log-line {
+    color: #f0a18d;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-family: Consolas, Monaco, monospace;
+}
+
+.log-line:last-child {
+    border-bottom: none;
+}
+
+.hint-text {
+    margin-top: 14px;
+    color: #5f6f87;
+    font-size: 14px;
+    line-height: 1.8;
+    background: #f7faff;
+    border: 1px solid #e3ebf8;
+    padding: 14px 16px;
+    border-radius: 12px;
+}
+
+/* 小说明区域 */
+.info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.info-mini-card {
+    background: #f8fbff;
+    border: 1px solid #e3ebf8;
+    border-radius: 12px;
+    padding: 14px 15px;
+}
+
+.info-mini-title {
+    font-size: 13px;
+    color: #6a7a91;
+    margin-bottom: 6px;
+}
+
+.info-mini-text {
+    font-size: 14px;
+    color: #314056;
+    line-height: 1.7;
+}
+
+/* 弹窗 */
+.modal-mask {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 20, 35, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 20px;
+}
+
+.modal-mask.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 720px;
+    max-width: 96%;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+    animation: popIn 0.22s ease;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #1f2d4b, #2b416f);
+    color: #fff;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h3 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.close-btn {
+    border: none;
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modal-body {
+    padding: 22px;
+    background: #f7f9fc;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.health-box {
+    padding: 26px 22px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eefaf0, #f8fff9);
+    border: 1px solid #cfe8d2;
+    color: #22613a;
+    font-size: 22px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.detail-log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.detail-log-item {
+    background: #101a34;
+    color: #ef8c70;
+    border-left: 5px solid #e06b4f;
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-family: Consolas, Monaco, monospace;
+    line-height: 1.7;
+    font-size: 16px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.tag-danger {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #ffe9e3;
+    color: #c14d31;
+    font-size: 13px;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+.tip {
+    margin-top: 14px;
+    color: #61708d;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+    .summary-card {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-main,
+    .stat-box {
+        min-height: auto;
+    }
+
+    .info-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .window-content {
+        padding: 14px;
+    }
+
+    .summary-title {
+        font-size: 24px;
+    }
+
+    .stat-value {
+        font-size: 26px;
+    }
+
+    .log-line {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+}
+</style>
+
+<div class="page">
+
+    <!-- 今日总览 -->
+    <div class="window-container">
+        <div class="window-title"><i>🤖</i>今日总览</div>
+        <div class="window-content">
+            <div class="summary-card clickable" id="todayCard">
+                <div class="summary-main">
+                    <div class="summary-date">2026年3月26日 · 实时安全巡检中</div>
+                    <div class="summary-title">今日安全态势</div>
+                    <div class="summary-desc">
+                        系统持续监测主机运行状态、可疑进程与异常操作行为。<br>
+                    </div>
+                </div>
+
+                <div class="stat-box blue">
+                    <div class="stat-label">总检测事件</div>
+                    <div class="stat-value">18651</div>
+                    <br></br>
+                    <div class="stat-note"> </div>
+                </div>
+
+                <div class="stat-box green">
+                    <div class="stat-label">已响应异常</div>
+                    <div class="stat-value">78</div>
+                    <div class="stat-note">系统已完成响应，当前处理状态稳定。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 日志信息 -->
+    <div class="window-container">
+        <div class="window-title"><i>🤖</i>日志信息</div>
+        <div class="window-content">
+            <div class="middle-log-box">
+                <div class="log-header">
+                    <div class="log-header-title">今日重点异常日志</div>
+                    <div class="log-status">仅显示有风险内容</div>
+                </div>
+                <div class="log-line">[12:12:36] PID=2345, CMD=Xorg，被Agent判定为恶意进程，已完成响应</div>
+                <div class="log-line">[17:22:35] PID=3124, CMD="/tmp/kworker"，被Agent判定为恶意进程，已完成响应</div>
+                <div class="log-line">[17:23:46] PID=7872, CMD="./xmrig"，被Agent判定为恶意进程，已完成响应</div>
+                <div class="log-line">[20:44:35] PID=6562, CMD="/dev/shm/.x"，被Agent判定为恶意进程，已完成响应</div>
+            </div>
+
+            <div class="hint-text">
+                当前区域仅展示今日最关键的异常日志摘要，用于快速查看风险情况。<br>
+                想查看完整明细，可点击上方“今日总览”卡片进入详情弹窗。
+            </div>
+
+            <!-- <div class="info-row">
+                <div class="info-mini-card">
+                    <div class="info-mini-title">状态说明</div>
+                    <div class="info-mini-text">
+                        当系统检测到异常时，会优先展示高风险进程、异常命令及响应结果，方便快速定位问题。
+                    </div>
+                </div>
+                <div class="info-mini-card">
+                    <div class="info-mini-title">展示规则</div>
+                    <div class="info-mini-text">
+                        页面默认不展示正常日志，避免信息过载，让安全人员把注意力集中在真正需要响应的内容上。
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- 昨日总览 -->
+    <div class="window-container">
+        <div class="window-title"><i>🤖</i>昨日总览</div>
+        <div class="window-content">
+            <div class="summary-card">
+                <div class="summary-main">
+                    <div class="summary-date">2026年3月25日 · 历史记录</div>
+                    <div class="summary-title">昨日运行概况</div>
+                    <div class="summary-desc">
+                        昨日系统已完成全周期安全检测与风险处置工作，整体运行态势平稳可控，未监测到高危威胁的持续扩散或传播迹象。
+                    </div>
+                </div>
+
+                <div class="stat-box blue">
+                    <div class="stat-label">总检测事件</div>
+                    <div class="stat-value">12519</div>
+                    <div class="stat-note">系统对主机环境进行了全天候巡检与行为记录。</div>
+                </div>
+
+                <div class="stat-box green">
+                    <div class="stat-label">已响应异常</div>
+                    <div class="stat-value">0</div>
+                    <br></br>
+                    <!-- <div class="stat-note">所有异常均已处置完毕，未留下待办风险项。</div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 弹窗 -->
+<div class="modal-mask" id="modalMask">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3>今日日志详情</h3>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+const abnormalLogs = [
+    "[17:44:36] PID=2345, CMD=Xorg，被Agent判定为恶意进程，已响应",
+    "[17:44:35] PID=3124, CMD=gedit，被Agent判定为恶意进程，已响应",
+    "[17:42:08] PID=1982, CMD=unknown_script.sh，被Agent判定为高危行为，已隔离",
+    "[16:58:21] PID=4511, CMD=rm -rf /tmp/test，被Agent判定为异常删除行为，已阻断"
+];
+
+const isTodaySafe = false;
+
+const todayCard = document.getElementById("todayCard");
+const modalMask = document.getElementById("modalMask");
+const modalBody = document.getElementById("modalBody");
+const closeBtn = document.getElementById("closeBtn");
+
+todayCard.addEventListener("click", () => {
+    renderModalContent();
+    modalMask.classList.add("show");
+});
+
+closeBtn.addEventListener("click", () => {
+    modalMask.classList.remove("show");
+});
+
+modalMask.addEventListener("click", (e) => {
+    if (e.target === modalMask) {
+        modalMask.classList.remove("show");
+    }
+});
+
+function renderModalContent() {
+    if (isTodaySafe) {
+        modalBody.innerHTML = `
+            <div class="health-box">
+                ✅ 你的电脑今天很健康<br />
+                当前未发现需要响应的异常日志
+                <div class="tip">系统运行状态正常，请继续保持良好的安全习惯。</div>
+            </div>
+        `;
+    } else {
+        const logHtml = abnormalLogs.map(log => `
+            <div class="detail-log-item">
+                <div class="tag-danger">异常日志</div>
+                <div>${log}</div>
+            </div>
+        `).join("");
+
+        modalBody.innerHTML = `
+            <div class="detail-log-list">
+                ${logHtml}
+            </div>
+            <div class="tip">这里只展示今日检测到的异常日志，不显示正常日志。</div>
+        `;
+    }
+}
+</script>
+
+{% endblock %}

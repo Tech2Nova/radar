@@ -1,0 +1,1202 @@
+{
+  "207f70800e2665b2fb712c8c22a96436dd6c0eba8aebcd568058eb6104e676a7": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/1",
+    "original_name": "1"
+  },
+  "4791ba4523c5910222744874a31507d34c38dc5b346f4884e4f38c786a49b21a": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/10",
+    "original_name": "10"
+  },
+  "fe0b08d6a3b669dffd890195427849092fb03bfdd5f44af003a01ac6e32a4e34": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/100",
+    "original_name": "100"
+  },
+  "9b3060440a679840459828c45e706db7e371c3efbf3c30c1f20070b0d8350394": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/11",
+    "original_name": "11"
+  },
+  "4a89a9bb844a905b9be5a1dcd71064e28031d520441d3d645126ea47b66a863a": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/12",
+    "original_name": "12"
+  },
+  "9dc87f384523e813a1b0acb4ef0babc08822e8940ade330f10e53131c5cdbbc1": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/13",
+    "original_name": "13"
+  },
+  "4072bd97cb4a7704d4802bceca85d40cccd9e21d1460c7fef341beb69e6408e8": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/14",
+    "original_name": "14"
+  },
+  "5f0d22751579dbf7413ca8974847f1f344cdeef7975b3de9c8781840bdb36251": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/15",
+    "original_name": "15"
+  },
+  "ff9ffafe09d1e04560104167d0bfa4e971765fb2986eeeb98fadabed93624f40": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/16",
+    "original_name": "16"
+  },
+  "154b8ecf5842a0402f69b47366c8ac194186fe146c9d1eee47c18f606d72142a": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/17",
+    "original_name": "17"
+  },
+  "848991cd73ae8ad0353d7590f9a719d30ea4a6b4d424d4444cb0283f12f2c1f5": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/18",
+    "original_name": "18"
+  },
+  "e794fcd79c4f5e43ff964e360e0e7219dcf3f71288066abcda3fbe4b42d500fb": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/19",
+    "original_name": "19"
+  },
+  "3d21702225a47ba4c7a2e5d014fbd1ff488d7b31a40084125a8d2bfa32a2239c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/2",
+    "original_name": "2"
+  },
+  "9471ea42b31843e82f0e00fc84dc1a5dba06150b280ab895bc9059c75a064a64": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/20",
+    "original_name": "20"
+  },
+  "cf8b1eae80089299e22616dcf404858cddb12c1b508ec9bfe7d60ed478b6d9ef": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/21",
+    "original_name": "21"
+  },
+  "eb8c5faa76e19dcd0608ef79aba1b4a34ec445b5e030bcbbb3be3cba8a0772cd": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/22",
+    "original_name": "22"
+  },
+  "6867681b4aed52ba0f08d02d039df9ebf7e2f214f818435e291f8fbed7cee46e": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/23",
+    "original_name": "23"
+  },
+  "768fa73eaa1db86daf61ccc1a78079810ca60e2f7c1926b995e5b29be6190030": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/24",
+    "original_name": "24"
+  },
+  "765267493f6201d080b29ca85e231c1f32ac15bb395d23f5474a88b215c84167": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/25",
+    "original_name": "25"
+  },
+  "87dbca5574db06f051df4632464e5722dc666cb8d13a94332f65d9946e0b82a8": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/26",
+    "original_name": "26"
+  },
+  "028ea0074598ffc73a5b738a3c80e0cb7cccd1ae18cd16bf77af07ffd24fb173": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/27",
+    "original_name": "27"
+  },
+  "53d47bdc97fdfc9986cfc0d13dcfe12c2664d213b337c7c488e898f0e0682736": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/28",
+    "original_name": "28"
+  },
+  "33b21f1cbedb143ac9fb6b6708b88e7907685e75c1b7eeb0d3e25c76f6687c97": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/29",
+    "original_name": "29"
+  },
+  "e8f5adf92b96cac730ec28d3c7f7f77a1bf46f2d3c5e8b929983596b2e77f39d": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/3",
+    "original_name": "3"
+  },
+  "a7f36ce888da473b43bcdd41d6a18619cd2af44abd7d1595f62b100867b0112b": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/30",
+    "original_name": "30"
+  },
+  "3b1576db68cdacf70e8a2b3541630bee3efa72e25c2383aa60f3690b21cf2a4f": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/31",
+    "original_name": "31"
+  },
+  "b96ac962cabc48d0cfbb0c4994dd212e571e25bec31ca26d1bf5cf7fcf5e64ea": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/32",
+    "original_name": "32"
+  },
+  "898c2c834a851288dc0e028095d00e2ee5143b27318851afb891f3203c060c20": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/33",
+    "original_name": "33"
+  },
+  "6a96649f1cb90cc2f71d9155033e622703c65c6dcbd087d2f6d87ec4fd38e706": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/34",
+    "original_name": "34"
+  },
+  "8e10eb9e4c01a66cb769774b36d63172ca020299c92c84332703f1788e0e24cb": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/35",
+    "original_name": "35"
+  },
+  "0b0fc0570d80994c7b4edbe02c933e08a48106c2963946e3f58b2447fb4ecbd4": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/36",
+    "original_name": "36"
+  },
+  "7b534404c28428cc92bbb1737d3fadc52495ebb7d3e3eb441ba2de3ed6f1d47c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/37",
+    "original_name": "37"
+  },
+  "f778774ee3ae25b4f4e7c458aca4c3c239953c305118944a0f463cd022d16576": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/38",
+    "original_name": "38"
+  },
+  "ed5f4189bff4be3326dcf07184093265f9255559c287571aff86d483cd620a17": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/39",
+    "original_name": "39"
+  },
+  "f9f0a42a2b1a75d786dce16d4f0ece24ad783f0db1963481a0e559e147195ca0": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/4",
+    "original_name": "4"
+  },
+  "d1faa1d512c0545277516d0988ab18eee0743d86b91b1bfdbe7ceb55eea85a38": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/40",
+    "original_name": "40"
+  },
+  "5e67bb5efcf98f57703f53bc1d26f6c4509e1f4a81a48dfdad96aa1235dc4e17": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/41",
+    "original_name": "41"
+  },
+  "f07b91a92d1ed5ca457f025ee0b7e8c0fbb9e0b4a4a2b069a786cb6e8d204ecd": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/42",
+    "original_name": "42"
+  },
+  "eb2f356c16d4bd0c83f1822ec8a38f60defd4ba3b806fa6e2dc09c5b75225a28": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/43",
+    "original_name": "43"
+  },
+  "123f4d5f174a0a069cc5f4cdb2e60898f5868cd8c4c279ee6bcefd7c86899428": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/44",
+    "original_name": "44"
+  },
+  "0e2a9a288b40ab32f1f5d8565addd073bc85fa64c9ebf79fd1a1f4a3b7b98295": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/45",
+    "original_name": "45"
+  },
+  "2b50d06c3038061df15cd61cacca57873b3cac5f9042aae7d25d1f08de1a6f31": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/46",
+    "original_name": "46"
+  },
+  "ce8bc9a7a5a58f54e98e896b9c599a8e12832aca98c2cb9696e44172a14c2afb": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/47",
+    "original_name": "47"
+  },
+  "970ce10391d54554e9e804465cfe98fb28f35f6cfa9341e4a2c0370ea4a4907c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/48",
+    "original_name": "48"
+  },
+  "51daacf5c7047f92dd8c3443d0ed87445e1688d52530e33b35806a4942abcbc9": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/49",
+    "original_name": "49"
+  },
+  "6fc19f5412a581472d77ca25f6ca04c42bfe6913ef3903e5f5b9a2844ee3f784": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/5",
+    "original_name": "5"
+  },
+  "2a842015c74663410fbefd9b24e3c87910d11f78c1566c86d1c158d34b027435": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/50",
+    "original_name": "50"
+  },
+  "b761505dcff9e2fabd5ec034f228bf802f3c10db05496e7c495159a9ad0643f9": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/51",
+    "original_name": "51"
+  },
+  "d2dd0b00a5d970e0d137a0abbe4afef890f966c89eba21cc1247c38f858870fe": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/52",
+    "original_name": "52"
+  },
+  "5d8bf4cf3ef2414dd8841e5ba9364621c855e15a045c242c3e5a4265cff1dedf": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/53",
+    "original_name": "53"
+  },
+  "496430b26abc42b4f8b5b27c1b0813c326505a538d06ee942ba163cd29b04d41": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/54",
+    "original_name": "54"
+  },
+  "0a4859c4b11a092e894fe7d8d2485319acb0a9519d3b215dfad5264318c51541": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/55",
+    "original_name": "55"
+  },
+  "4293155e6ac74960b7070abc78d4f9452f46f1c9a7f24636eb639e63dd5507f4": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/56",
+    "original_name": "56"
+  },
+  "99e2e68ea3dfd09a17cdc0c14756fe55e093f0f58b65b8921415e123e68ee289": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/57",
+    "original_name": "57"
+  },
+  "fd510a4bd34a8e100a4742fd7905b04c60ebfabe03b2d38efc10609dc6a60b64": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/58",
+    "original_name": "58"
+  },
+  "1f0a3de404b61db044f2cb3500b8c687058de97ecbf5923bae230f23273f3248": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/59",
+    "original_name": "59"
+  },
+  "e5463e527cc14b9299b9d4f2702f7d482083d618426a3bb02900325ce16f111d": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/6",
+    "original_name": "6"
+  },
+  "26769fd76dababf7eb4465a22f18982b499458f7c843ce91c1cd2a4a4eeb7c42": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/60",
+    "original_name": "60"
+  },
+  "4d442e3dd3efcb7d7dfa7ebd1b97befc044f015b24636df733d67c87ea848fcf": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/61",
+    "original_name": "61"
+  },
+  "04aa8a1d9c32c222e559407857d413a237aaca56b81dc63395956871e37d28a4": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/62",
+    "original_name": "62"
+  },
+  "3e6d3fc949f9bfb2f9b8b271b4056107e78ece2981bdf97b9065e63a3c0a760c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/63",
+    "original_name": "63"
+  },
+  "ca5c5260e08de39250f0416c0fba8707a062824ce4f08e766145fd3f3b9a49ad": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/64",
+    "original_name": "64"
+  },
+  "8063e2569e364a11defdeea14169aae238fbc28fe67f382d48e880dd5a60d941": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/65",
+    "original_name": "65"
+  },
+  "e22a32619aac9a0f589421823158226f04472fcd59c27f37213697616305b5fc": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/66",
+    "original_name": "66"
+  },
+  "3bd694224a4c42aa24d913c5304515709470df6ac626a46a8671b35b82e32e99": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/67",
+    "original_name": "67"
+  },
+  "421744ec0850918f9a28faea20f40ab06334103a5a3e814f69d33a01bd6d78d8": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/68",
+    "original_name": "68"
+  },
+  "906edc26938be888934899cfb3353eefcaabe04c069ca36944e242e0c6fc0926": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/69",
+    "original_name": "69"
+  },
+  "a16b36823608f623d9b560815b548bce359fdffd546850d76fa1983de43efc14": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/7",
+    "original_name": "7"
+  },
+  "ac14d52149ce09ef06a7382eea116b026e7c99ec43eb86b63b8c9bdbbbb99a57": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/70",
+    "original_name": "70"
+  },
+  "8c35da6935282df94662be2231db8c7b37283804aa820997029ee39b472530ea": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/71",
+    "original_name": "71"
+  },
+  "503d4448e18febad2271f3eb96baa8e53b5aabac76d5bfa43303fe285a0886df": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/72",
+    "original_name": "72"
+  },
+  "2f10b3a16c5638dcf66c2f0836aa7012bab302e178f76aa932f4d2e21ab1ec7e": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/73",
+    "original_name": "73"
+  },
+  "ba7ed2e0a890f2da178e82693be1b09f005f241fc91652fafc7ba5de54865bb4": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/74",
+    "original_name": "74"
+  },
+  "aab9d88656a44440db099b51df83fd3f317e8b39ed578a12c75b3dfc29ebc5ac": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/75",
+    "original_name": "75"
+  },
+  "0fcba4d30fcf6328d208ac854231f592c31057d0fd0c99c719f2d64a32075173": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/76",
+    "original_name": "76"
+  },
+  "d231e979a3043ab3c328e80a041ed6146d533970beca380aafe943b40d3b199e": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/77",
+    "original_name": "77"
+  },
+  "98678e8ab6c1e22d94a45353833c6e577b3f54053a9fe1f64fec417e4e9f5656": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/78",
+    "original_name": "78"
+  },
+  "d31c1acde4349758dce983f5a362508f62696eee72ca976c5e148f31cf68aaa1": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/79",
+    "original_name": "79"
+  },
+  "caca598c9a405de8b6d001f53c67d37767dacfd3bdeba5ba8794d0d334288534": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/8",
+    "original_name": "8"
+  },
+  "ebb989b0d5640bcc4447bcf40a44e3c07da0af4f6d442232e3373e20a310b6db": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/80",
+    "original_name": "80"
+  },
+  "c104a0298368cb30aa7b17629e29375b1cbfe469e0e73b16089607fd32d6e6ed": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/81",
+    "original_name": "81"
+  },
+  "b7ed4fb00b27e38af744ca5ca9040f6525990fea38044876d10eaf0a26e9bba6": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/82",
+    "original_name": "82"
+  },
+  "72433f972b6520d5269f5f54d9e5216703b1041b425e254d59c646f0f2cc11cf": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/83",
+    "original_name": "83"
+  },
+  "43e1894d574bd615204b6ee15ef5a1df01f0d8967897afbd17bd17e99dbeb44b": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/84",
+    "original_name": "84"
+  },
+  "588cb1ce9cbb8ba9091f6e826df405e16cd098fe064b2665e6d18051e73a4b2c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/85",
+    "original_name": "85"
+  },
+  "129afbec1f88ed2733803f0d30da4956da82e61abb73e58245f3e1468d67ca40": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/86",
+    "original_name": "86"
+  },
+  "6fb00834df369a6855a5162fe9e129f3259e9accdf56b3799ee5292a0e89697c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/87",
+    "original_name": "87"
+  },
+  "25b1542fb0b80036279b704bdad1157cc370dfcbe5c72b61ef474707ab7b781c": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/88",
+    "original_name": "88"
+  },
+  "d1b3e1018ad004d233eb6239b1351c3096dfd23644e050fcf634838ad2f58f6e": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/89",
+    "original_name": "89"
+  },
+  "6b086e0a9aa84f726f67afaf1146473502f3ba89ee1d2cdc2b84f336119866f1": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/9",
+    "original_name": "9"
+  },
+  "072f609c4064a37b72937921797ae110d9aa6bcb87f146f4bdff7c49336877b5": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/90",
+    "original_name": "90"
+  },
+  "322b866ab7ffbeb5d4d80a010845be09d01d1b85fbcb0b6a3d29692e2bf42f1a": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/91",
+    "original_name": "91"
+  },
+  "bcd39b5b6d5e599347fbc89af2a8b39a2050ec8cd8dfbf2d4042fde6fb8fbac4": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/92",
+    "original_name": "92"
+  },
+  "ef14d4846ef100d66f857836cee4d3bea3edb31a6a2be134f3fc0e66cd9a0519": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/93",
+    "original_name": "93"
+  },
+  "d6aef2c12d6bc1dabbe0ddba2eb6fba9fc84fb80a55a23b9946dbf57af874366": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/94",
+    "original_name": "94"
+  },
+  "981213deb0a4a4d703a9f17ec991628748021766d8fd2632597e2661d8305809": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/95",
+    "original_name": "95"
+  },
+  "eb1ceae3f777a2092e33fadf8498f40b92201d5822f61e353b056da89eb71097": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/96",
+    "original_name": "96"
+  },
+  "5062e6c2a743bedcfcc61a0437edf88ad3f4af6cc9615e456799631f750e424a": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/97",
+    "original_name": "97"
+  },
+  "4530c1129c40df4237471bd924fa912c7d0bae7e19c932479fca79746becd69e": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/98",
+    "original_name": "98"
+  },
+  "7dbe5f8b752545a901d2c9d786d311440b83e07c38e01c3bdc9a96a240ebe11d": {
+    "label": 0,
+    "label_name": "benign",
+    "original_path": "/home/mz/Desktop/707/benign/99",
+    "original_name": "99"
+  },
+  "059d610456bc7c7313d1873dffbb6f4bab3b2f9f0eb191aecb3594590d38ebcc": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/1",
+    "original_name": "1"
+  },
+  "0834a5b7251aef11ebac3166781838eb201a5124b7225a098128906039738aad": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/10",
+    "original_name": "10"
+  },
+  "051fef99d3b916ac7280a380a68173a540fa50d323de31d4f75e267dfcf81782": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/100",
+    "original_name": "100"
+  },
+  "088f1d3dc82b9253798c20f03cdc17de160c966b17464725a57693a2d92dbc0f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/11",
+    "original_name": "11"
+  },
+  "009ed622bf936a036828fab19ceb69d78264ab51507396a3809bbe947ddd9ddf": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/12",
+    "original_name": "12"
+  },
+  "0ad001a2f9a148be338eb7ee06600d0ed1425d3016dabd2000d2ad0f62863dd1": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/13",
+    "original_name": "13"
+  },
+  "04344639a3e9072eea626ece50940bbbe470f8fdadcacaa047ebac72749c279f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/14",
+    "original_name": "14"
+  },
+  "0c5eb06c2ab6b08477b8f7073b5368fd19fa534188c79f190e9be57c06b8472e": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/15",
+    "original_name": "15"
+  },
+  "015e694d99207c10f31898cdd32a160b6b42a3e812bbbbcbddd215960e1540a1": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/16",
+    "original_name": "16"
+  },
+  "0c3c4467c15c7dd6d12fb389ef89bb38464889be8205dabcf5c951ae865297e2": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/17",
+    "original_name": "17"
+  },
+  "0b64ab5aa45f787b1142424008600a306752bd9d20eb78d2c92f7ada40c7c4f8": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/18",
+    "original_name": "18"
+  },
+  "0b7996bca486575be15e68dba7cbd802b1e5f90436ba23f802da66292c8a055f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/19",
+    "original_name": "19"
+  },
+  "02492076664547d4f4fc367d90d06e9e06272010aef25863c43bf34b6982569c": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/2",
+    "original_name": "2"
+  },
+  "0bc9bdb29b75b20dbd0beaa13ba9afdf519f64ccd967a5ec2a6f7ed3063ab9d7": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/20",
+    "original_name": "20"
+  },
+  "05b3bea9053d88e02fdaa0efa9894db64cc3236104f8e227c95ea386e952e893": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/21",
+    "original_name": "21"
+  },
+  "0468ba5c627dee9f0056f13c5bc2fa82e11f386dcfdfeab1c00412f5dfa2655c": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/22",
+    "original_name": "22"
+  },
+  "03f831dfeeeade9dcac62e1eaad959c7714d7a40cb8c5727167c069f2836415f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/23",
+    "original_name": "23"
+  },
+  "0367a7891daca652a81e5e6619a0d82741542af55075c4e63e3df18711f9979c": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/24",
+    "original_name": "24"
+  },
+  "02c89672ddc46b490801088e5b3b594db93137b7b33a85a70a2fecf3a79d7645": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/25",
+    "original_name": "25"
+  },
+  "05d442aae0f028c67ce2c23740194a6ddd1b90a0d016249a12a03691e26ec2f7": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/26",
+    "original_name": "26"
+  },
+  "039a1fad76652f90e3850cb97358121ad0cc28a19434c085ef89206edadf7aa0": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/27",
+    "original_name": "27"
+  },
+  "0348b9dedbd8fa79c1c1acc5aa7a98cb0ad3906d583f20dd94f6473a275c711c": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/28",
+    "original_name": "28"
+  },
+  "0412e7a429394e17995fd4e8e394d2f3f9b0542f110a0ea030737c05aba343ee": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/29",
+    "original_name": "29"
+  },
+  "0146459f1858781ed0185cc2f12c06530b503b85ad54abf5e08532533f5e3bc3": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/3",
+    "original_name": "3"
+  },
+  "09cd09f055e08759d16ea68b37dd850df61d1ac69e85b95b13f8f8e2cd85bebf": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/30",
+    "original_name": "30"
+  },
+  "08657210305ac150a6f124d3513091390f1da1222a358ac705e615241bd57307": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/31",
+    "original_name": "31"
+  },
+  "068d7728ba9fed30f870d7a9a74d612579c3e73ab55230834a3c8f6f5f7eed05": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/32",
+    "original_name": "32"
+  },
+  "01d81c32f93c49c5eb32034689f72e880e610d2f52e3413955ba84d4913fe491": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/33",
+    "original_name": "33"
+  },
+  "04990107427bfb3d87651f0db38a1cbc064195496f30b13a99f1bb7f7a7b1b37": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/34",
+    "original_name": "34"
+  },
+  "049fd0e07574b5deda344e844d7b3a952f2367222cf1bd2f08e3a830727ea66d": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/35",
+    "original_name": "35"
+  },
+  "0ab11af9a97edf9f0dbd765ff5428d883467b74c7edd152be578828b11fa6f48": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/36",
+    "original_name": "36"
+  },
+  "092b1149ba03cfe5eb51cb1c42d5220199694bc3355cbcd121555ea7814c303f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/37",
+    "original_name": "37"
+  },
+  "049584b4c27f9fd0afcce72dc243b495095c6fe18caaa34c8436e566f83c292d": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/38",
+    "original_name": "38"
+  },
+  "0065892c1de2e38a1cbefc7ae5c4ddff3ca165e119da97e8342c9830094efd63": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/39",
+    "original_name": "39"
+  },
+  "0b446edc4d4b1c80e977b8e33dfea5d9820c50fbd14f271d1a1f431f3299a8d8": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/4",
+    "original_name": "4"
+  },
+  "0a905b7abbc49a7d45949be9ec01384649d42039a3cdcb6969e9a1bbbf162305": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/40",
+    "original_name": "40"
+  },
+  "02444bc626c91f1e23961e2ecfa391f4afc18fdcd2035ff5f073f028d3d76ad9": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/41",
+    "original_name": "41"
+  },
+  "038162745bd91db41f2e92cf047e94cc9e7129bddc8c48daa3fbbd8c67955870": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/42",
+    "original_name": "42"
+  },
+  "07b1df6c639b38d6101ddf45496f30b2e6fbfc621e99416f1bf168c732b831c3": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/43",
+    "original_name": "43"
+  },
+  "0bb7ba61b50aeb56359724e3360f44bcc970f03c002219d3a9eec13157a2eeae": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/44",
+    "original_name": "44"
+  },
+  "0945d73b9253f4ff1c4e09a0deba3d505e7ae41c86374a746108275fed2327b1": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/45",
+    "original_name": "45"
+  },
+  "04c046f4ff27779f0044fe7abcd72f0326eeed0b4289bb0d5f0cdec66ba1e44f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/46",
+    "original_name": "46"
+  },
+  "0a6bbc6062dc7be283483acf3167ea71fb7e1bffa0814217d4c2494ce745c807": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/47",
+    "original_name": "47"
+  },
+  "0466fca3ad19a5267628cf50443a93000b0212e10cf4e0deaf92eabe4438d279": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/48",
+    "original_name": "48"
+  },
+  "0ae98aea92565a235c8e531b66d3729164c11249a260b2f21f2050e675168496": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/49",
+    "original_name": "49"
+  },
+  "01681a620dfdbe13b94e9d5ecc4e5c13ae376b4f26c300f8a92d87b831abbd91": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/5",
+    "original_name": "5"
+  },
+  "060fa1e01aa8133877404c3ba2151b06e095c80eaa199b7e93e252bbc24f2146": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/50",
+    "original_name": "50"
+  },
+  "0888f859edf19eb30f5ca27f5ced20512ac4f661af4319f1b092e203d0b1d0cc": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/51",
+    "original_name": "51"
+  },
+  "03e3859f2109215e347b93c4df95bb1a2d402280a5ec870c4c74422db83d7ffb": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/52",
+    "original_name": "52"
+  },
+  "08a26dc2edff4fb6ffb2efc1aeee9854b35afc7af545f89e345817ef71e41f8f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/53",
+    "original_name": "53"
+  },
+  "011f372292cdaf099de3c73a6adae8becf4f87601cfd7ba8a1b422a7ea527aab": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/54",
+    "original_name": "54"
+  },
+  "06dbb4fcb5a34e50ac16324758152a22dbd8d2110f43cc8f0d23de4500e677ca": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/55",
+    "original_name": "55"
+  },
+  "0d0c409af9e39ea6164b1e7708a24d03ac57e300d67810ed6c2d133cd3fa2086": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/56",
+    "original_name": "56"
+  },
+  "0a8ef1501ed00397e9664af5a77d50db5d9e4bcbf16f24bcc42d0e6f507e583f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/57",
+    "original_name": "57"
+  },
+  "04ae90a44e9df4893731fb27ce44d073bc80d9c5694988536a47d7db13841857": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/58",
+    "original_name": "58"
+  },
+  "03405d7ff6bc92987666ec54d815f698b2fcfa1896ad3aedb2ec04ba94f23088": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/59",
+    "original_name": "59"
+  },
+  "04a9a8cdc40a2401efa16741b3f56ab6d3c6e1d19137ceffc4b97b04cce4e494": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/6",
+    "original_name": "6"
+  },
+  "04c9bc9f6bd75b0df5d6c062606897ca17841d40015b0a84b6926a08e13c4388": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/60",
+    "original_name": "60"
+  },
+  "00dc2c576f9bbc0002ca7d271a28141c5d91791ffe0e01ed4b74ad3bad49bfd2": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/61",
+    "original_name": "61"
+  },
+  "0ac603b74d317f447ab7eb45e36ce3064da7de605473029fcea21106c4aac275": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/62",
+    "original_name": "62"
+  },
+  "05ac6ec09bcd05331fe797f43fe6b564f3238b43ae23ad4df7996374c233a0de": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/63",
+    "original_name": "63"
+  },
+  "00c5a2f55a0a1304960793ff6be90d1cd95cc605291dd90b3affb0aed42d30aa": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/64",
+    "original_name": "64"
+  },
+  "0af17362823daf7f933f9904f08c784699a8530d540e872b4847ba2aa910cd5c": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/65",
+    "original_name": "65"
+  },
+  "081e6b3d30f4c013cf5dd763707a0233730cbd176d61919e452b52aa9d9f0a5e": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/66",
+    "original_name": "66"
+  },
+  "081ddf973b6af75ea0d3d62dab679f770f6841f3c20f54672c044fc8b436f484": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/67",
+    "original_name": "67"
+  },
+  "08f7acd2278ba2c8b9c1ffac6563fbec7fb8d1b167f833e663600138f9c59842": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/68",
+    "original_name": "68"
+  },
+  "0683cdf921258b19802d093b921ffd9e83a9f753b3faaffa4d404590c64dbf0b": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/69",
+    "original_name": "69"
+  },
+  "07910266edf487d7f7ad6dc6cd5c971189541253b88a49d1819d5dec626f3ebe": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/7",
+    "original_name": "7"
+  },
+  "012a4ff40cb29b0f31d4ab1089eab7296666e3477bcb8e508517074df9768894": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/70",
+    "original_name": "70"
+  },
+  "02e31af74a85d028fe57d5718cad1c20ddb264f8dd7d13fe008cedf7711eb74a": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/71",
+    "original_name": "71"
+  },
+  "0424586cc6ae1f3a30e811665fcc4b934fd7cc8a2b084934fbd1bcd1fd48df25": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/72",
+    "original_name": "72"
+  },
+  "04ce5b960fcc86acc34089d713be71dcd718b1e14c17a0581b9008f3b881011f": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/73",
+    "original_name": "73"
+  },
+  "053f7098d2063ee94005d0fc1f93d2b81a075531229d8580fe0f73bf24a5758d": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/74",
+    "original_name": "74"
+  },
+  "092512450a84114a76d5332fd1ac2877cdacaf78c1c44c0f87f3d4d32cd0a0bc": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/75",
+    "original_name": "75"
+  },
+  "08b488964ffc4c4994fc8a8f642cb5bbfba29a313e5fc05035d62c0d4157b154": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/76",
+    "original_name": "76"
+  },
+  "054e8c1b87e4d89f285c14159a0a5b2709e2694e7ce6515a3f54bf736f9b5b5b": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/77",
+    "original_name": "77"
+  },
+  "0ab880a8d9a92da292fa80e99f01104c3e809379b7185e5cba9134010a4b004a": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/78",
+    "original_name": "78"
+  },
+  "078ebeffaac7bad40c991aadd4b85e26825f669e8a40ba5efdaac51999b0b8f8": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/79",
+    "original_name": "79"
+  },
+  "094a3b758bbdc9fd9a2ac6339f02aeee13eeac4594957cc950bec889da1d5eb1": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/8",
+    "original_name": "8"
+  },
+  "054604c9f34f5d9e54d1cdf595ef320e1f48f74aa6c94a6360abad153909dbc1": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/80",
+    "original_name": "80"
+  },
+  "07496b192a452d70f3f6c0dc1509bfee36fc64c08e8b86edc7dba8fc10cd8616": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/81",
+    "original_name": "81"
+  },
+  "0a0b546e9cb7a6a932feb0f0ea010fc5807227e2e905651d4230360685b5d146": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/82",
+    "original_name": "82"
+  },
+  "0c89d7ed722c4da66dafa1b1481d0d2556a1f67eb00bf1c66b07507e3bc1e794": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/83",
+    "original_name": "83"
+  },
+  "02944695aefb1eccccc990a1df9b3c45922665b22deb4a06a8fcc1f773039c95": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/84",
+    "original_name": "84"
+  },
+  "07a8e3c322cf8d16f7cf3f316d88bcef90a8cffbee6669539a06f07df09fa761": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/85",
+    "original_name": "85"
+  },
+  "0449818cc2d35ea909ef0cd3c94359385fc67b00ecd509387ab9d24e9d30db4d": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/86",
+    "original_name": "86"
+  },
+  "06347507bbc805f6a56d8e83854efa2863a68e80f5f34e705615b5818331c08d": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/87",
+    "original_name": "87"
+  },
+  "0b8d9f56c6723c9ae35477182e67039fb4403e2eed7e655abc400c16a0d41c14": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/88",
+    "original_name": "88"
+  },
+  "07fa8038eaedd1e663790ac9ade59675513d8aecb72cc4149a08b942b44c410e": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/89",
+    "original_name": "89"
+  },
+  "04ebde61db24392b9e730061ace6d349a0e0ad41c1737348a90b179139d8f130": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/9",
+    "original_name": "9"
+  },
+  "0ba1c19f4bfdd3781c4accb984e7949ea2709c01f5ea05c7487d7b16c54a8ded": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/90",
+    "original_name": "90"
+  },
+  "06e3bc03cd9d275755db4bf08b684e3dd27190728f020e709a0d70502e0b685b": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/91",
+    "original_name": "91"
+  },
+  "04acf8ef967af050f09fe8b417f454198a68ac3b694911620b1f2a30702a41ea": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/92",
+    "original_name": "92"
+  },
+  "0c47695a8fa58152b7d4e9fb3bd15bb927acc682b73246c495e596b8ec9de444": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/93",
+    "original_name": "93"
+  },
+  "0a64634ebc07d816393827ffd413809562c0399f6a147d9661a3aed3ab68fb7a": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/94",
+    "original_name": "94"
+  },
+  "0bc3d228f817421986acd0663caff7a731d461dde27e37ff6dd786ff174ceda1": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/95",
+    "original_name": "95"
+  },
+  "0b2eb6529721745fe7978dfbad55355143dfb10100724d9fa14e8027b34b7d6e": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/96",
+    "original_name": "96"
+  },
+  "0471eb040fba5b767f7234be11e5be6c3172046e193641ca2d44349e2bd32777": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/97",
+    "original_name": "97"
+  },
+  "06ccca30682d4a224fc42e5a676751ab5fcb585e41a0c8c1ab169bbb0b7afb73": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/98",
+    "original_name": "98"
+  },
+  "049cec50c6e9e1c807fe3efc5ec5c947c42fcf9e421f79215c89a9cf31326272": {
+    "label": 1,
+    "label_name": "malware",
+    "original_path": "/home/mz/Desktop/707/malware/99",
+    "original_name": "99"
+  }
+}

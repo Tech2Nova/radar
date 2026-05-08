@@ -1,0 +1,34 @@
+[INFO] sample=media/task_runtime/c540903c-84ad-4cc3-8ba6-a2c196f84a73/inputs/adec5537-2b34-463b-81b4-48dc245105b9
+[INFO] raw_perf=media/task_runtime/c540903c-84ad-4cc3-8ba6-a2c196f84a73/raw_perf/adec5537-2b34-463b-81b4-48dc245105b9.raw.csv
++ echo 1
++ sudo -S lxc-stop -n lxc2 -k
+lxc-stop: lxc2: tools/lxc_stop.c: main: 168 lxc2 is not running
++ echo 1
++ sudo -S lxc-snapshot -n lxc2 -r snap0
++ echo 1
++ sudo -S lxc-start -n lxc2 -d
++ echo 1
++ sudo -S lxc-attach -n lxc2 -- mkdir -p /tmp/hpc_samples
++ echo 1
++ sudo -S lxc-attach -n lxc2 -- chmod +x /tmp/hpc_samples/sample.bin
++ echo 1
++ sudo -S perf stat -C 0 -I 100 -x , -e branch-instructions,branch-misses,cache-misses,cache-references,cpu-cycles,instructions,bus-cycles,ref-cycles -o media/task_runtime/c540903c-84ad-4cc3-8ba6-a2c196f84a73/raw_perf/adec5537-2b34-463b-81b4-48dc245105b9.raw.csv -- bash -c '
+      set +e
+
+      lxc-attach -n '\''lxc2'\'' -- bash -lc '\''
+        timeout 10s "/tmp/hpc_samples/sample.bin" >/dev/null 2>&1 &
+        SAMPLE_PID=$!
+
+        sleep 10.5
+
+        pkill -9 -u user 2>/dev/null || true
+        killall -9 -u user 2>/dev/null || true
+        kill -9 $SAMPLE_PID 2>/dev/null || true
+        wait $SAMPLE_PID 2>/dev/null || true
+      '\'' >/dev/null 2>&1 || true
+
+      sleep 0.2
+    '
++ echo 1
++ sudo -S lxc-stop -n lxc2 -k
+[INFO] perf raw saved: media/task_runtime/c540903c-84ad-4cc3-8ba6-a2c196f84a73/raw_perf/adec5537-2b34-463b-81b4-48dc245105b9.raw.csv

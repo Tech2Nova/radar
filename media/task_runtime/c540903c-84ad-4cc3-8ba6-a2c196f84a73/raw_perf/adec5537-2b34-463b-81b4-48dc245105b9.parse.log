@@ -1,0 +1,8 @@
+[INFO] parse raw file: media/task_runtime/c540903c-84ad-4cc3-8ba6-a2c196f84a73/raw_perf/adec5537-2b34-463b-81b4-48dc245105b9.raw.csv
+[INFO] total raw lines: 866
+[INFO] valid event records: 864
+[INFO] skipped/bad lines: 1
+[INFO] unique time windows: 108
+[INFO] first timestamps: [0.100152303, 0.200811693, 0.301225414, 0.4017302, 0.501905332, 0.602163937, 0.702357804, 0.802556326, 0.902950241, 1.003146151]
+[INFO] collected 108 rows, truncating to 100
+[INFO] output csv saved: media/task_runtime/c540903c-84ad-4cc3-8ba6-a2c196f84a73/output_data.csv

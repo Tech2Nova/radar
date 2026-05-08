@@ -24,6 +24,8 @@ sys.path.append(CUCKOO_PATH)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+RF_MODEL_PATH = os.path.join(BASE_DIR, "rf_hpc_model.joblib")
+KNOWN_SAMPLE_DB_PATH = os.path.join(BASE_DIR, "sample_db.json")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

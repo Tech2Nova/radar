@@ -2,77 +2,491 @@
 {% load static %}
 {% block content %}
 
-<div class="container-fluid mt-5">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <!-- 分数区域 -->
-        <div class="col-md-3">
-            <div class="card" style="height: 300px !important;">
-                <div class="alert alert-danger text-center" style="color:#5faa98!important;">
-                    <h4><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> 评分</h4>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(108, 124, 255, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(28, 154, 214, 0.08), transparent 24%),
+        linear-gradient(180deg, #eef2f8 0%, #e8edf5 100%);
+    color: #1d2433;
+}
+
+.page {
+    width: min(1080px, 94vw);
+    margin: 34px auto;
+    padding: 18px 0 8px;
+}
+
+.window-container {
+    margin: 0 0 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(198, 210, 228, 0.9);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(31, 45, 79, 0.08),
+        0 2px 8px rgba(31, 45, 79, 0.04);
+    backdrop-filter: blur(8px);
+}
+
+.window-title {
+    background: linear-gradient(90deg, #1f2d4b, #2f4777);
+    color: #fff;
+    font-size: 18px;
+    padding: 14px 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
+
+.window-content {
+    padding: 18px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.45fr;
+    gap: 14px;
+    align-items: stretch;
+}
+
+.score-card {
+    background: linear-gradient(135deg, #eefcf3, #f8fff9);
+    border: 1px solid #cfe8d2;
+    border-radius: 16px;
+    padding: 20px 18px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-label {
+    font-size: 14px;
+    color: #607089;
+    margin-bottom: 10px;
+}
+
+.score-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #22613a;
+    margin-bottom: 12px;
+}
+
+.score-desc {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #4f6b58;
+    text-align: center;
+}
+
+.score-tip {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #607089;
+    text-align: center;
+}
+
+.overview-card {
+    background: linear-gradient(135deg, #f7faff, #eef4ff);
+    border: 1px solid #dbe6fb;
+    border-radius: 16px;
+    padding: 22px 20px;
+    min-height: 250px;
+}
+
+.overview-subtitle {
+    font-size: 14px;
+    color: #607089;
+    margin-bottom: 8px;
+}
+
+.overview-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1d2d4f;
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
+
+.overview-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5e6f87;
+    margin-bottom: 16px;
+}
+
+.info-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(198, 210, 228, 0.6);
+    font-size: 14px;
+    color: #314056;
+    line-height: 1.6;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list strong {
+    min-width: 92px;
+    color: #667790;
+    font-weight: 600;
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #e6f8ec;
+    color: #22613a;
+    border: 1px solid #cfe8d2;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.analysis-panel,
+.conclusion-panel {
+    background: #f8fbff;
+    border: 1px solid #e3ebf8;
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 360px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #f7faff, #eef4ff);
+    border-bottom: 1px solid #e3ebf8;
+}
+
+.panel-title {
+    color: #1d2d4f;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.panel-status {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.panel-status.safe {
+    color: #22613a;
+    background: #e6f8ec;
+    border: 1px solid #cfe8d2;
+}
+
+.process-list {
+    padding: 16px;
+}
+
+.process-item {
+    display: flex;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #e3ebf8;
+}
+
+.process-item:last-child {
+    border-bottom: none;
+}
+
+.process-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1f2d4b, #3f63a5);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.process-content {
+    flex: 1;
+}
+
+.process-title {
+    font-size: 14px;
+    color: #314056;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.process-desc {
+    font-size: 13px;
+    color: #607089;
+    line-height: 1.7;
+}
+
+.conclusion-panel {
+    padding: 18px;
+}
+
+.conclusion-main {
+    background: linear-gradient(135deg, #eefcf3, #f8fff9);
+    border: 1px solid #cfe8d2;
+    border-radius: 14px;
+    padding: 20px 18px;
+    margin-bottom: 14px;
+}
+
+.conclusion-label {
+    font-size: 13px;
+    color: #607089;
+    margin-bottom: 8px;
+}
+
+.conclusion-title {
+    font-size: 24px;
+    color: #22613a;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.conclusion-desc {
+    font-size: 14px;
+    color: #4f6b58;
+    line-height: 1.8;
+}
+
+.mini-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.mini-stat-card {
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.mini-stat-card.green {
+    background: linear-gradient(135deg, #eefcf3, #e6f8ec);
+    border: 1px solid #d4ecd8;
+}
+
+.mini-stat-card.blue {
+    background: linear-gradient(135deg, #edf4ff, #e6f0ff);
+    border: 1px solid #d6e3fb;
+}
+
+.mini-stat-label {
+    font-size: 13px;
+    color: #667790;
+    margin-bottom: 8px;
+}
+
+.mini-stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e2b45;
+}
+
+.notice-box {
+    background: #f7faff;
+    border: 1px solid #e3ebf8;
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #5f6f87;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.notice-box strong {
+    color: #314056;
+}
+
+@media (max-width: 900px) {
+    .result-grid,
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page {
+        width: 94%;
+        margin: 24px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .window-content {
+        padding: 14px;
+    }
+
+    .overview-title {
+        font-size: 24px;
+    }
+
+    .score-title {
+        font-size: 22px;
+    }
+
+    .conclusion-title {
+        font-size: 22px;
+    }
+
+    .mini-stat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="page">
+
+    <div class="window-container">
+        <div class="window-title"><i>🤖</i>检测结果总览</div>
+        <div class="window-content">
+            <div class="result-grid">
+                <div class="score-card">
+                    <div class="score-label">安全评分</div>
+                    <div class="score-title">未发现异常</div>
                     <canvas id="danger-circle" width="150" height="150"></canvas>
-                    <p>未检测到 <b>异常行为风险</b>，置信度为 <strong>{{ confidence|floatformat:2 }}%</strong></p>
-                    <p>
-                        <b>请注意</b>: 评分系统仍处于研发阶段，应视为<b><i>测试</i></b>指标。
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- 文件/URL 概览区域 -->
-        <div class="col-md-7">
-            <div class="card" style="height: 300px !important;">
-                <div class="card-header">
-                    <h4 style="color: white!important; padding-left: 10px"> 攻击概览</h4>
-                </div>
-                <div class="card-body">
-                    <div class="file-info">
-                        <ul>
-                            <li><strong>任务id:</strong> {{ task_id }}</li>
-                            <li><strong>攻击类型:</strong> 正常</li>
-                            <li><strong>攻击注入时间:</strong> 无</li>
-                            <li><strong>文件大小:</strong> 245.7 KB</li>
-                        </ul>
+                    <div class="score-desc">
+                        未检测到 <b>异常行为风险</b><br>
+                        置信度为 <strong>{{ confidence|floatformat:2 }}%</strong>
                     </div>
+                    <div class="score-tip">
+                        请注意：评分系统仍处于研发阶段，应视为测试指标。
+                    </div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="overview-subtitle">样本行为检测完成</div>
+                    <div class="overview-title">本次样本判定为正常</div>
+                    <div class="overview-desc">
+                        系统已完成运行时硬件性能计数器特征采集与模型推理，当前未发现明显异常行为风险。
+                    </div>
+
+                    <ul class="info-list">
+                        <li><strong>任务 ID</strong><span>{{ task_id }}</span></li>
+                        <li><strong>攻击类型</strong><span class="status-pill">正常</span></li>
+                        <li><strong>注入时间</strong><span>无</span></li>
+                        <li><strong>文件大小</strong><span>245.7 KB</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 样本信息 -->
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-5">
-            <div class="card" style="background-color: #171625;height: 450px !important;">
-                <div class="card-header">
-                    <h4 style="color: white!important; padding-left: 10px"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 检测分析</h4>
-                </div>
-                <div class="card-body">
-                    <div class="file-info">
-                        <ul>
-                            <li><strong>神经元激活洞察：</strong> 正常输入激活294号神经元，投毒输入激活397号，可能导致额外计算负载</li>
-                            <li><strong>可解释性分析:</strong> GPU HPC显示内存带宽增加20%，符合专利研究中Bullseye Polytope攻击的缓存复用模式</li>
-                            <li><strong>缓解建议：</strong> 使用Nsight收集GPU HPC、应用ML分类器如J48移除异常、采用HAISec框架重训模型，减少对干净数据的依赖</li>
-                        </ul>
+    <div class="window-container">
+        <div class="window-title"><i>🤖</i>检测完成摘要</div>
+        <div class="window-content">
+            <div class="detail-grid">
+
+                <div class="analysis-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">检测流程摘要</div>
+                        <div class="panel-status safe">已完成</div>
+                    </div>
+
+                    <div class="process-list">
+                        <div class="process-item">
+                            <div class="process-icon">1</div>
+                            <div class="process-content">
+                                <div class="process-title">样本接收</div>
+                                <div class="process-desc">文件已成功提交并进入检测流程。</div>
+                            </div>
+                        </div>
+
+                        <div class="process-item">
+                            <div class="process-icon">2</div>
+                            <div class="process-content">
+                                <div class="process-title">特征采集</div>
+                                <div class="process-desc">系统已完成运行时 HPCs 硬件特征采集。</div>
+                            </div>
+                        </div>
+
+                        <div class="process-item">
+                            <div class="process-icon">3</div>
+                            <div class="process-content">
+                                <div class="process-title">模型推理</div>
+                                <div class="process-desc">检测模型已完成行为特征判定。</div>
+                            </div>
+                        </div>
+
+                        <div class="process-item">
+                            <div class="process-icon">4</div>
+                            <div class="process-content">
+                                <div class="process-title">结果生成</div>
+                                <div class="process-desc">当前样本未触发异常行为风险告警。</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-md-5">
-            <div class="card" style="background-color: #171625; height: 450px !important;">
-                <div class="card-header" style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.25rem;">
-                    <h4 style="color: white!important; margin: 0;">训练过程中GPU HPC计数值</h4>
-                    <div id="gpu-hpc-legend" style="color: white; font-size: 12px; display: flex; align-items: center; gap: 10px;"></div>
+                <div class="conclusion-panel">
+                    <div class="conclusion-main">
+                        <div class="conclusion-label">安全结论</div>
+                        <div class="conclusion-title">当前样本表现为正常</div>
+                        <div class="conclusion-desc">
+                            基于本次采集到的运行时硬件性能计数器特征，系统未发现明显异常执行模式。
+                            当前结果表明，该样本在本次检测环境下表现为正常，暂未发现需要立即响应的风险行为。
+                        </div>
+                    </div>
+
+                    <div class="mini-stat-grid">
+                        <div class="mini-stat-card green">
+                            <div class="mini-stat-label">风险等级</div>
+                            <div class="mini-stat-value">低风险</div>
+                        </div>
+
+                        <div class="mini-stat-card blue">
+                            <div class="mini-stat-label">处理结果</div>
+                            <div class="mini-stat-value">无需响应</div>
+                        </div>
+                    </div>
+
+                    <div class="notice-box">
+                        <strong>注意事项：</strong>
+                        检测结果仅基于当前运行环境和本次采集到的行为特征生成，不代表样本在所有环境下均绝对安全。
+                        如样本来源不明，建议结合静态分析、沙箱日志或人工复核进一步确认。
+                    </div>
                 </div>
-                <div class="card-body">
-                    <canvas id="gpu-hpc-chart" style="max-height: 400px; width: 100%; height: 400px;"></canvas>
-                </div>
+
             </div>
         </div>
     </div>
+
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 function drawProgress(canvasId, radius, startColor, endColor, score) {
@@ -88,7 +502,7 @@ function drawProgress(canvasId, radius, startColor, endColor, score) {
   ctx.beginPath();
   ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
   ctx.lineWidth = 10;
-  ctx.strokeStyle = 'lightgrey';
+  ctx.strokeStyle = '#e6edf7';
   ctx.stroke();
 
   var normalizedScore = score / 100;
@@ -104,13 +518,13 @@ function drawProgress(canvasId, radius, startColor, endColor, score) {
   ctx.stroke();
 
   if (score !== 0) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#22613a";
     ctx.font = "bold 20px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(score + "%", x, y);
   } else {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#22613a";
     ctx.font = "bold 40px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -119,96 +533,12 @@ function drawProgress(canvasId, radius, startColor, endColor, score) {
 }
 
 // 从 Django 模板获取 confidence 值
-var score = {{ confidence|floatformat:2 }} * 100; // 将 0-1 的值转换为百分比
+var score = {{ confidence|floatformat:2 }} * 100;
 drawProgress("danger-circle", 50, '#5faa98', 'green', score);
-
-document.addEventListener('DOMContentLoaded', function() {
-    var canvas = document.getElementById('gpu-hpc-chart');
-    if (!canvas) {
-        console.error('Canvas element with ID "gpu-hpc-chart" not found');
-        return;
-    }
-    var ctx = canvas.getContext('2d');
-    var gpuHpcChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [
-                'PCIe Write BAR0',
-                'PCIe Read BAR0',
-                'PCIe Write BW',
-                'PCIe Read BW',
-                'L1 Shared Throughput',
-                'L1 Surface Throughput',
-                'L1 Hit Rate',
-                'L2 Bandwidth'
-            ],
-            datasets: [
-                {
-                    label: '正常基准数据',
-                    data: [0.8, 0.82, 0.83, 0.81, 0.85, 0.84, 0.86, 0.87],
-                    backgroundColor: '#5faa98',
-                    borderColor: '#5faa98',
-                    barThickness: 20,
-                    maxBarThickness: 30
-                },
-                {
-                    label: '实际采集数据',
-                    data: [0.91, 0.93, 0.95, 0.92, 0.97, 0.94, 0.96, 0.98],
-                    backgroundColor: '#f56154',
-                    borderColor: '#f56154',
-                    barThickness: 20,
-                    maxBarThickness: 30
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: false
-                },
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 45,
-                        minRotation: 45,
-                        font: { size: 10 },
-                        color: '#ffffff' // 设置 x 轴标签文字颜色为白色
-                    },
-                    barPercentage: 0.4,
-                    categoryPercentage: 0.5
-                },
-                y: {
-                    min: 0,
-                    max: 1
-                }
-            }
-        }
-    });
-
-    // 动态生成图例
-    const legendContainer = document.getElementById('gpu-hpc-legend');
-    const legendItems = gpuHpcChart.data.datasets.map(dataset => `
-        <span style="display: inline-flex; align-items: center;">
-            <span style="display: inline-block; width: 12px; height: 12px; background-color: ${dataset.backgroundColor}; margin-right: 5px;"></span>
-            ${dataset.label}
-        </span>
-    `).join('');
-    legendContainer.innerHTML = legendItems;
-});
 
 function downloadReport() {
     window.alert('报告下载功能即将上线');
 }
 </script>
+
 {% endblock %}

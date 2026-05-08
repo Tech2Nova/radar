@@ -5,9 +5,9 @@
     <div class="logo-description">
         <div class="logo-smarthawk">
             <img src="{% static 'graphic/logo.png' %}" />
-            <span>RADAR</span>
+            <span>基于HPCs硬件特征安全的检测平台</span>
         </div>
-        <p>守护您的AI：洞察后门，阻击投毒威胁， <br> 赋能安全未来，铸就智能信任。</p>
+        <p>守护您的安全：分析可疑文件 <br> 赋能安全未来，铸就智能信任。</p>
     </div>
 
     <form role="form" id="upload-form" action="{% url 'index' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -134,11 +134,12 @@
         .then(data => {
             if (data.error) {
                 alert('提交失败：' + data.error);
+            } else if (data.status_url) {
+                window.location.href = data.status_url;
             } else if (data.task_id) {
-                console.log('任务提交成功，task_id:', data.task_id); // 调试日志
-                pollStatus(data.task_id); // 开始轮询状态
+                window.location.href = `/submission/status/${data.task_id}/`;
             } else {
-                alert('提交失败：未收到 task_id');
+                alert('提交失败：未收到任务状态页面地址');
             }
         })
         .catch(error => {

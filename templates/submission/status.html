@@ -1,37 +1,455 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
-<div class="loader" style="color: white;">
-    <div class="bean"></div>
-    <div class="text" style="color: white!important;">正在分析...</div>
-    <p>任务 ID: {{ task_id }}</p>
-    <p>当前状态: <span id="status">{{ status }}</span></p>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(108, 124, 255, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(28, 154, 214, 0.08), transparent 24%),
+        linear-gradient(180deg, #eef2f8 0%, #e8edf5 100%);
+    color: #1d2433;
+}
+
+.page {
+    width: min(760px, 92vw);
+    margin: 52px auto;
+    padding: 18px 0 8px;
+}
+
+.window-container {
+    margin: 0 0 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(198, 210, 228, 0.9);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(31, 45, 79, 0.08),
+        0 2px 8px rgba(31, 45, 79, 0.04);
+    backdrop-filter: blur(8px);
+}
+
+.window-title {
+    background: linear-gradient(90deg, #1f2d4b, #2f4777);
+    color: #fff;
+    font-size: 18px;
+    padding: 14px 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
+
+.window-content {
+    padding: 18px;
+}
+
+.analysis-card {
+    display: grid;
+    grid-template-columns: 1.45fr 0.95fr;
+    gap: 14px;
+    align-items: stretch;
+}
+
+.analysis-main {
+    background: linear-gradient(135deg, #f7faff, #eef4ff);
+    border: 1px solid #dbe6fb;
+    border-radius: 16px;
+    padding: 22px 20px 20px;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.analysis-subtitle {
+    font-size: 14px;
+    color: #607089;
+    margin-bottom: 8px;
+}
+
+.analysis-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d2d4f;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.analysis-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5e6f87;
+}
+
+.status-box {
+    border-radius: 16px;
+    padding: 18px 16px;
+    min-height: 190px;
+    background: linear-gradient(135deg, #edf4ff, #e6f0ff);
+    border: 1px solid #d6e3fb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.status-label {
+    font-size: 13px;
+    color: #667790;
+    margin-bottom: 8px;
+}
+
+.status-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e2b45;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.status-note {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #607089;
+}
+
+.progress-section {
+    margin-top: 16px;
+    background: #f8fbff;
+    border: 1px solid #e3ebf8;
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.progress-title {
+    font-size: 14px;
+    color: #314056;
+    font-weight: 600;
+}
+
+.progress-percent {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1d2d4f;
+}
+
+.progress-wrapper {
+    width: 100%;
+    height: 16px;
+    border-radius: 999px;
+    background: #e6edf7;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(31, 45, 79, 0.08);
+}
+
+.progress-bar {
+    width: 1%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #1f2d4b, #3f63a5, #6c7cff);
+    transition: width 0.2s linear;
+}
+
+.task-info {
+    margin-top: 14px;
+    color: #5f6f87;
+    font-size: 14px;
+    line-height: 1.8;
+    background: #f7faff;
+    border: 1px solid #e3ebf8;
+    padding: 14px 16px;
+    border-radius: 12px;
+    word-break: break-all;
+}
+
+.task-info strong {
+    color: #314056;
+    font-weight: 600;
+}
+
+.middle-log-box {
+    margin-top: 16px;
+    background: linear-gradient(180deg, #111b34 0%, #0d162b 100%);
+    border: 1px solid #24355f;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(8, 14, 30, 0.18);
+}
+
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.log-header-title {
+    color: #dfe8ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.log-status {
+    font-size: 12px;
+    color: #dbeafe;
+    background: rgba(108, 124, 255, 0.16);
+    border: 1px solid rgba(108, 124, 255, 0.35);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.log-line {
+    color: #dfe8ff;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-family: Consolas, Monaco, monospace;
+}
+
+.log-line:last-child {
+    border-bottom: none;
+}
+
+.dot-loading::after {
+    content: "";
+    animation: dots 1.4s infinite;
+}
+
+@keyframes dots {
+    0% { content: ""; }
+    25% { content: "."; }
+    50% { content: ".."; }
+    75% { content: "..."; }
+    100% { content: ""; }
+}
+
+@media (max-width: 900px) {
+    .analysis-card {
+        grid-template-columns: 1fr;
+    }
+
+    .analysis-main,
+    .status-box {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        width: 94%;
+        margin: 24px auto;
+    }
+
+    .window-content {
+        padding: 14px;
+    }
+
+    .analysis-title {
+        font-size: 24px;
+    }
+
+    .status-value {
+        font-size: 24px;
+    }
+
+    .log-line {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+}
+</style>
+
+<div class="page">
+    <div class="window-container">
+        <div class="window-title">
+            <i>🤖</i>样本安全分析
+        </div>
+
+        <div class="window-content">
+            <div class="analysis-card">
+                <div class="analysis-main">
+                    <div class="analysis-subtitle">HPCs 硬件特征采集中</div>
+                    <div class="analysis-title">
+                        正在分析<span class="dot-loading"></span>
+                    </div>
+                    <div class="analysis-desc">
+                        系统正在采集样本运行时硬件性能计数器特征，并基于检测模型进行安全判定。<br>
+                        分析过程通常需要约 20 秒，请勿关闭或刷新当前页面。
+                    </div>
+                </div>
+
+                <div class="status-box">
+                    <div class="status-label">当前任务状态</div>
+                    <div class="status-value" id="status">{{ status }}</div>
+                    <div class="status-note">
+                        任务完成后，系统将自动跳转至检测结果页面。
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-header">
+                    <div class="progress-title">分析进度</div>
+                    <div class="progress-percent" id="progress-percent">1%</div>
+                </div>
+
+                <div class="progress-wrapper">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+
+                <div class="task-info">
+                    <div><strong>任务 ID：</strong>{{ task_id }}</div>
+                    <div><strong>状态说明：</strong>正在等待后台采集、特征处理与模型推理完成。</div>
+                </div>
+            </div>
+
+            <div class="middle-log-box">
+                <div class="log-header">
+                    <div class="log-header-title">实时处理流程</div>
+                    <div class="log-status">自动更新中</div>
+                </div>
+                <div class="log-line" id="log-1">[初始化] 已创建样本分析任务，正在进入处理队列。</div>
+                <div class="log-line" id="log-2">[采集阶段] 正在准备运行环境与 HPCs 采集流程。</div>
+                <div class="log-line" id="log-3">[推理阶段] 等待模型完成安全检测结果判定。</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    function checkStatus(taskId) {
-        fetch(`/status/${taskId}/`, {
+    const taskId = "{{ task_id }}";
+
+    const totalDuration = 20000;
+    const startPercent = 1;
+    const maxPercentBeforeComplete = 99;
+
+    let completed = false;
+    let startTime = Date.now();
+
+    const progressBar = document.getElementById("progress-bar");
+    const progressPercent = document.getElementById("progress-percent");
+    const statusText = document.getElementById("status");
+
+    const log1 = document.getElementById("log-1");
+    const log2 = document.getElementById("log-2");
+    const log3 = document.getElementById("log-3");
+
+    function updateProgress() {
+        if (completed) {
+            return;
+        }
+
+        const elapsed = Date.now() - startTime;
+        const calculated = startPercent + (elapsed / totalDuration) * (100 - startPercent);
+        const progress = Math.min(calculated, maxPercentBeforeComplete);
+        const displayProgress = Math.floor(progress);
+
+        progressBar.style.width = displayProgress + "%";
+        progressPercent.innerText = displayProgress + "%";
+
+        if (displayProgress >= 15) {
+            log1.innerText = "[初始化] 样本分析任务已启动，正在执行后台检测流程。";
+        }
+
+        if (displayProgress >= 35) {
+            log2.innerText = "[采集阶段] 正在采集样本运行时 HPCs 硬件特征。";
+        }
+
+        if (displayProgress >= 95) {
+            log3.innerText = "[推理阶段] 正在进行特征处理与模型推理，请稍候。";
+        }
+
+        requestAnimationFrame(updateProgress);
+    }
+
+    function checkStatus() {
+        fetch(`/submission/status/${taskId}/`, {
             headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRFToken": "{{ csrf_token }}"
             }
         })
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert(data.error);
-            } else if (data.status === 'reported') {
-                window.location.href = data.redirect;
-            } else {
-                document.getElementById('status').innerText = data.status;
-                setTimeout(() => checkStatus(taskId), 2000);
+                statusText.innerText = data.error;
+                log3.innerText = "[异常] 状态查询返回错误：" + data.error;
+                return;
             }
+
+            statusText.innerText = data.status;
+
+            if (data.status === "queued") {
+                log1.innerText = "[初始化] 任务已进入队列，正在等待调度。";
+            }
+
+            if (data.status === "processing") {
+                log2.innerText = "[采集阶段] 后台正在执行 HPCs 数据采集与样本分析。";
+            }
+
+            if (data.status === "completed" && data.redirect) {
+                completed = true;
+
+                progressBar.style.width = "100%";
+                progressPercent.innerText = "100%";
+                statusText.innerText = "completed";
+
+                log1.innerText = "[初始化] 样本分析任务已完成。";
+                log2.innerText = "[采集阶段] HPCs 特征采集与处理已完成。";
+                log3.innerText = "[推理阶段] 模型检测完成，正在跳转结果页面。";
+
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 500);
+
+                return;
+            }
+
+            if (data.status === "failed") {
+                completed = true;
+
+                progressBar.style.width = "100%";
+                progressPercent.innerText = "分析失败";
+                statusText.innerText = "failed";
+
+                log3.innerText = "[异常] 分析任务执行失败，请联系管理员查看后台日志。";
+                return;
+            }
+
+            setTimeout(checkStatus, 2000);
         })
         .catch(error => {
-            console.error('Status check failed:', error);
-            setTimeout(() => checkStatus(taskId), 2000);
+            console.error("Status check failed:", error);
+            log3.innerText = "[异常] 状态查询失败，正在重试。";
+            setTimeout(checkStatus, 2000);
         });
     }
 
-    window.onload = () => checkStatus('{{ task_id }}');
+    window.onload = function () {
+        progressBar.style.width = startPercent + "%";
+        progressPercent.innerText = startPercent + "%";
+
+        updateProgress();
+        checkStatus();
+    };
 </script>
 {% endblock %}
